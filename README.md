@@ -3,7 +3,7 @@
 Jaxcsd stands for Java API for Xml Care Service Directory. It is an open source project developed to facilitate making Care Service Directories adhere to the Care Service Discovery Standard. The project also facilitates Care Service Finders to query data from the Info Manager. In JAXCSD, the operation invocation is represented by an XML-based CSD Standard. The CSD Standard defines a CSD schema which has the envelope structure, encoding rules, and conventions for representing the operation invocations and responses. These calls and responses are transmitted via the API over HTTP.The JAXCSD API hides the complexity of the operations that are involved from the application developer.
 
 
-JAXCSD was developed to address the Zimbabwean Health Integation use case of implementing the CSD Standard, however it can be reused to suit other possible implementations. This is the alpha version of the project and is work in progress.
+JAXCSD was developed to address the Zimbabwean Health Integation use case of implementing the CSD Standard, however it can be reused to suit other possible implementations. This is the alpha version of the project which is more or less like a prototype and is still a work in progress.
 
 
 
@@ -69,7 +69,7 @@ System.out.print(csdXmlString);
 
 As highlighted this is an alpha version of the project and a lot of work needs to be done.
 
-* There is need to introduce quality assurance testing in JaxCsd.
-* Incorporate javadoc and site for the project. 
+* To introduce quality assurance testing in JaxCsd.
+* To incorporate javadoc and site for the project. 
 * To setup wiki for JaxCsd
-* To install jaxcsd in Maven Central
+* To install jaxcsd artifact in Maven Central
