@@ -69,5 +69,7 @@ System.out.print(csdXmlString);
 
 As highlighted this is an alpha version of the project and a lot of work needs to be done.
 
-* There is need to implement unit testing, functional testing and incorporate JUnit in the project.
-* Incorporate javadoc for the project. 
+* There is need to introduce quality assurance testing in JaxCsd.
+* Incorporate javadoc and site for the project. 
+* To setup wiki for JaxCsd
+* To install jaxcsd in Maven Central
