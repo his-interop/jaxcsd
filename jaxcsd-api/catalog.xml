@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/home/charles/NetBeansProjects/CsdGroup/jaxcsd/jaxcsd-api/../../../../Software/BaseX/basex/resources/CSD.xsd" uri="src/main/resources/jaxb/jaxcsd/CSD.xsd"/>
+    <system systemId="http://www.w3.org/2001/XMLSchema.xsd" uri="src/main/resources/jaxb/jaxcsd/www.w3.org/2001/XMLSchema.xsd"/>
+    <system systemId="http://www.w3.org/MarkUp/Forms/2002/XForms-Schema.xsd" uri="src/main/resources/jaxb/jaxcsd/www.w3.org/MarkUp/Forms/2002/XForms-Schema.xsd"/>
+    <system systemId="http://www.w3.org/MarkUp/SCHEMA/xml-events-attribs-1.xsd" uri="src/main/resources/jaxb/jaxcsd/www.w3.org/MarkUp/SCHEMA/xml-events-attribs-1.xsd"/>
+</catalog>
