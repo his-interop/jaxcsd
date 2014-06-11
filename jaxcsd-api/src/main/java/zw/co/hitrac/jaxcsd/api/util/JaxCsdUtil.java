@@ -114,6 +114,10 @@ public class JaxCsdUtil {
         items.add(codedType);
         return items;
     }
+    
+    public static boolean isEmptyString(String string){
+        return (string==null || string.trim().length()==0);
+    }
 
     public static void main(String[] args) throws ParseException {
       System.out.println(toDateFromIsoShortString("2014-05-17"));
