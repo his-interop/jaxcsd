@@ -1,5 +1,7 @@
 package zw.co.hitrac.jaxcsd.api.marshal;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import zw.co.hitrac.jaxcsd.api.msg.AttributesWrapper;
 import zw.co.hitrac.jaxcsd.api.query.RequestParams;
 import static zw.co.hitrac.jaxcsd.api.msg.InlineXmlElementFactory.getInlineXmlElement;
@@ -29,6 +31,13 @@ public class RequestParamsMarshaller extends Marshaller<RequestParams>{
            
            if(requestParams.getCommonName()!=null){
                sb.append(getInlineXmlElement("commonName", requestParams.getCommonName()));
+           }
+           
+           if(requestParams.getCodedType()!=null){
+               Map<String,String> attributes=new LinkedHashMap<String, String>();
+               attributes.put("code", requestParams.getCodedType().getCode());
+               attributes.put("codingSchema", requestParams.getCodedType().getCodingSchema());
+               sb.append(getInlineXmlElement("codedType", attributes));
            }
            
            if(requestParams.getStart()!=null){

@@ -16,7 +16,7 @@ public class SvsManager {
     public static List<ValueSet> retrieveValueSet(String id, String hostAddress) {
         String httpAddress = hostAddress + "/CSD/SVS/RetrieveValueSet?ID=" + id;
         String xmlResponseBody = JaxCsdUtil.executeGet(httpAddress);
-        System.out.println(xmlResponseBody);
+        //System.out.println(xmlResponseBody);
         try {
             RetrieveValueSetResponse retrieveValueSetResponse = RetrieveValueSetResponseHandler.getRetrieveValueSetResponse(xmlResponseBody);
             if (retrieveValueSetResponse != null) {
