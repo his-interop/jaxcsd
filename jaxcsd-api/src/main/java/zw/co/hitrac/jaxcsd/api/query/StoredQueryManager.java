@@ -26,6 +26,7 @@ public class StoredQueryManager {
             }
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
+            throw new RuntimeException(ex);
         }
         
         return null;

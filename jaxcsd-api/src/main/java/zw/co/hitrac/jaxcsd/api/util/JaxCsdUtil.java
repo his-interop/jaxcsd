@@ -12,6 +12,7 @@ import java.util.TimeZone;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
@@ -83,6 +84,20 @@ public class JaxCsdUtil {
             HttpPost httpPost = new HttpPost(httpAddress);
             HttpEntity httpEntity = new StringEntity(httpBody);
             httpPost.setEntity(httpEntity);
+            httpPost.setHeader("Content-Type", "text/xml;charset=UTF-8");
+            HttpResponse response = httpclient.execute(httpPost);
+            String strResponseMessage = JaxCsdUtil.parseHttpEntity(new BufferedHttpEntity(response.getEntity()));
+            httpclient.getConnectionManager().shutdown();
+            return strResponseMessage;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    public static String executeGet(String httpAddress) {
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httpPost = new HttpGet(httpAddress);
             httpPost.setHeader("Content-Type", "text/xml;charset=UTF-8");
             HttpResponse response = httpclient.execute(httpPost);
             String strResponseMessage = JaxCsdUtil.parseHttpEntity(new BufferedHttpEntity(response.getEntity()));
