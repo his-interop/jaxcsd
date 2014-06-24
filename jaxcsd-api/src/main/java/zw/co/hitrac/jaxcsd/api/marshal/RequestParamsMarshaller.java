@@ -40,6 +40,13 @@ public class RequestParamsMarshaller extends Marshaller<RequestParams>{
                sb.append(getInlineXmlElement("codedType", attributes));
            }
            
+           if(requestParams.getOtherID()!=null){
+               Map<String,String> attributes=new LinkedHashMap<String, String>();
+               attributes.put("code", requestParams.getOtherID().getCode());
+               attributes.put("assigningAuthorityName", requestParams.getOtherID().getAssigningAuthorityName());
+               sb.append(getInlineXmlElement("otherID", attributes));
+           }
+           
            if(requestParams.getStart()!=null){
               sb.append(getInlineXmlElement("start", String.valueOf(requestParams.getStart()))); 
            }
