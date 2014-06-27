@@ -54,6 +54,10 @@ public class RequestParamsMarshaller extends Marshaller<RequestParams>{
            if(requestParams.getMax()!=null){
                sb.append(getInlineXmlElement("max", String.valueOf(requestParams.getMax()))); 
            }
+           
+           if(requestParams.getPushRequest()!=null){
+               sb.append(requestParams.getPushRequest().marshal());
+           }
        }
        sb.append("</requestParams>");
        return sb.toString();

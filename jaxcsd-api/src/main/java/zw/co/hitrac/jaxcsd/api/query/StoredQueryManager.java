@@ -53,6 +53,15 @@ public class StoredQueryManager {
         
     }
       
+      public static String pushCSD(RequestParams requestParams, String httpAddress) {
+        CareServicesRequest careServicesRequest = new CareServicesRequest(new Function(StoredQueryConstants.PUSH_REQUEST, requestParams));
+        String xmlRequestBody = careServicesRequest.marshal();
+        System.out.println("xmlBody=" + xmlRequestBody);
+        String xmlResponseBody = JaxCsdUtil.executeXmlPost(xmlRequestBody, httpAddress);
+        return xmlResponseBody;
+        
+    }
+      
      
       
     

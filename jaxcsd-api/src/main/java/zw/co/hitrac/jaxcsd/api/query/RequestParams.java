@@ -4,6 +4,7 @@ import java.io.Serializable;
 import zw.co.hitrac.jaxcsd.api.domain.Address;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import zw.co.hitrac.jaxcsd.api.domain.OtherID;
+import zw.co.hitrac.jaxcsd.api.domain.PushRequest;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
 import zw.co.hitrac.jaxcsd.api.domain.UniqueID;
 
@@ -21,6 +22,7 @@ public class RequestParams implements Serializable{
     private Integer start;
     private Integer max;
     private Record record;
+    private PushRequest pushRequest;
 
     public UniqueID getUniqueID() {
         return uniqueID;
@@ -77,11 +79,22 @@ public class RequestParams implements Serializable{
     public void setMax(Integer max) {
         this.max = max;
     }
-    
-    
-    
-    
-    
+
+    public Record getRecord() {
+        return record;
+    }
+
+    public void setRecord(Record record) {
+        this.record = record;
+    }
+
+    public PushRequest getPushRequest() {
+        return pushRequest;
+    }
+
+    public void setPushRequest(PushRequest pushRequest) {
+        this.pushRequest = pushRequest;
+    }
     
     
 }
