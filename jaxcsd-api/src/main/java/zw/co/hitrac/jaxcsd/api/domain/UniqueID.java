@@ -1,12 +1,10 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Charles Chigoriwa
  */
-public abstract class UniqueID implements Serializable{
+public abstract class UniqueID implements CsdMarshalable{
     
     protected String oid;
 

@@ -2,7 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import zw.co.hitrac.jaxcsd.api.marshal.ProviderMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.ProviderMarshaler;
 
 /**
  *
@@ -80,9 +80,9 @@ public class Provider extends CsdEntity {
     public void setSpecialties(List<CodedType> specialties) {
         this.specialties = specialties;
     }
-    
-    public Provider addOtherID(String code,String assigningAuthorityName){
-        OtherID otherID=new OtherID();
+
+    public Provider addOtherID(String code, String assigningAuthorityName) {
+        OtherID otherID = new OtherID();
         otherID.setCode(code);
         otherID.setAssigningAuthorityName(assigningAuthorityName);
         this.otherIDs.add(otherID);
@@ -121,7 +121,11 @@ public class Provider extends CsdEntity {
     }
 
     public String marshal() {
-        return ProviderMarshaller.get().marshal(this);
+        return ProviderMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return ProviderMarshaler.get().marshal(this, elementName);
     }
 
     public Name getTopName() {

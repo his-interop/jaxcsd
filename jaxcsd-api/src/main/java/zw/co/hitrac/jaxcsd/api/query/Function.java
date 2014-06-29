@@ -1,12 +1,13 @@
 package zw.co.hitrac.jaxcsd.api.query;
 
-import java.io.Serializable;
+import zw.co.hitrac.jaxcsd.api.domain.CsdMarshalable;
+import zw.co.hitrac.jaxcsd.api.marshal.FunctionMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Function implements Serializable{
+public class Function implements CsdMarshalable{
     
     private String uuid;
     private boolean encapsulated;
@@ -49,6 +50,14 @@ public class Function implements Serializable{
 
     public void setEncapsulated(boolean encapsulated) {
         this.encapsulated = encapsulated;
+    }
+
+    public String marshal() {
+       return FunctionMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+       return FunctionMarshaler.get().marshal(this, elementName);
     }
     
     

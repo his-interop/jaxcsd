@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.ProviderOrganizationMarshaler;
 
 /**
  *
@@ -42,6 +43,14 @@ public class ProviderOrganization extends UniqueID{
 
     public void setContactPoints(List<ContactPoint> contactPoints) {
         this.contactPoints = contactPoints;
+    }
+
+    public String marshal() {
+     return ProviderOrganizationMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return ProviderOrganizationMarshaler.get().marshal(this, elementName);
     }
     
     

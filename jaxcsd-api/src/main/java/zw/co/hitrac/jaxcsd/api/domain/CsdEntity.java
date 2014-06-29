@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Charles Chigoriwa
  */
-public abstract class CsdEntity extends UniqueID implements CsdMarshallable{
+public abstract class CsdEntity extends UniqueID implements CsdMarshalable{
     
     protected List<CodedType> codedTypes=new ArrayList<CodedType>();
     protected List<Extension> extensions=new ArrayList<Extension>();

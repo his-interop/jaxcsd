@@ -1,16 +1,16 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
+import zw.co.hitrac.jaxcsd.api.marshal.CodedTypeMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class CodedType implements Serializable{
-    
+public class CodedType implements CsdMarshalable {
+
     private String code;
     private String codingSchema;
-    private String value="";
+    private String value = "";
 
     public CodedType() {
     }
@@ -18,18 +18,12 @@ public class CodedType implements Serializable{
     public CodedType(String code, String codingSchema) {
         this(code, codingSchema, "");
     }
-    
-    
-    
-    
 
     public CodedType(String code, String codingSchema, String value) {
         this.code = code;
         this.codingSchema = codingSchema;
         this.value = value;
     }
-    
-    
 
     public String getCode() {
         return code;
@@ -55,7 +49,11 @@ public class CodedType implements Serializable{
         this.value = name;
     }
 
-       
-    
-    
+    public String marshal() {
+        return CodedTypeMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return CodedTypeMarshaler.get().marshal(this,elementName);
+    }
 }

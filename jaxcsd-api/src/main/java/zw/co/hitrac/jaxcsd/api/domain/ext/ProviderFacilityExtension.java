@@ -17,6 +17,14 @@ public class ProviderFacilityExtension extends Extension{
     public void setFacilityName(String facilityName) {
         this.facilityName = facilityName;
     }
+
+    public String marshal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String marshal(String elementName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

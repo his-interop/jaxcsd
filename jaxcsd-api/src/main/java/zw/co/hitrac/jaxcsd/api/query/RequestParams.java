@@ -3,16 +3,18 @@ package zw.co.hitrac.jaxcsd.api.query;
 import java.io.Serializable;
 import zw.co.hitrac.jaxcsd.api.domain.Address;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
+import zw.co.hitrac.jaxcsd.api.domain.CsdMarshalable;
 import zw.co.hitrac.jaxcsd.api.domain.OtherID;
 import zw.co.hitrac.jaxcsd.api.domain.PushRequest;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
 import zw.co.hitrac.jaxcsd.api.domain.UniqueID;
+import zw.co.hitrac.jaxcsd.api.marshal.RequestParamsMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class RequestParams implements Serializable{
+public class RequestParams implements CsdMarshalable{
     
     private UniqueID uniqueID;
     private OtherID otherID;
@@ -94,6 +96,14 @@ public class RequestParams implements Serializable{
 
     public void setPushRequest(PushRequest pushRequest) {
         this.pushRequest = pushRequest;
+    }
+
+    public String marshal() {
+      return RequestParamsMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+       return RequestParamsMarshaler.get().marshal(this, elementName);
     }
     
     

@@ -1,12 +1,12 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import zw.co.hitrac.jaxcsd.api.marshal.PushRequestMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.PushRequestMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class PushRequest implements CsdMarshallable{
+public class PushRequest implements CsdMarshalable{
     
     private CSD csd;
 
@@ -21,7 +21,11 @@ public class PushRequest implements CsdMarshallable{
     
 
     public String marshal() {
-        return PushRequestMarshaller.get().marshal(this);
+        return PushRequestMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return PushRequestMarshaler.get().marshal(this, elementName);
     }
     
 }

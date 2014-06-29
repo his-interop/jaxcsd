@@ -2,7 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import zw.co.hitrac.jaxcsd.api.marshal.OrganizationMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.OrganizationMarshaler;
 
 /**
  *
@@ -53,7 +53,11 @@ public class Organization extends AbstractOrganization{
     }
 
     public String marshal() {
-        return OrganizationMarshaller.get().marshal(this);
+        return OrganizationMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+      return OrganizationMarshaler.get().marshal(this, elementName);
     }
     
    

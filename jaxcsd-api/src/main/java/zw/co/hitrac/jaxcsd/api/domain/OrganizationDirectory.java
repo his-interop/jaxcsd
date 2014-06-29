@@ -2,13 +2,13 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import zw.co.hitrac.jaxcsd.api.marshal.OrganizationDirectoryMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.OrganizationDirectoryMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class OrganizationDirectory implements CsdMarshallable {
+public class OrganizationDirectory implements CsdMarshalable {
 
     private List<Organization> organizations = new ArrayList<Organization>();
 
@@ -26,6 +26,10 @@ public class OrganizationDirectory implements CsdMarshallable {
     }
 
     public String marshal() {
-        return OrganizationDirectoryMarshaller.get().marshal(this);
+        return OrganizationDirectoryMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+      return OrganizationDirectoryMarshaler.get().marshal(this, elementName);
     }
 }

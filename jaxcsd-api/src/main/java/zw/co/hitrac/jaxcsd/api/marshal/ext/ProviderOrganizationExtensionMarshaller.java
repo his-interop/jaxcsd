@@ -2,14 +2,14 @@ package zw.co.hitrac.jaxcsd.api.marshal.ext;
 
 import java.util.Map;
 import zw.co.hitrac.jaxcsd.api.domain.ext.ProviderOrganizationExtension;
-import zw.co.hitrac.jaxcsd.api.marshal.ExtensionMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.ExtensionMarshaler;
 import static zw.co.hitrac.jaxcsd.api.msg.InlineXmlElementFactory.getInlineXmlElement;
 
 /**
  *
  * @author Daniel Nkhoma
  */
-public class ProviderOrganizationExtensionMarshaller extends ExtensionMarshaller<ProviderOrganizationExtension> {
+public class ProviderOrganizationExtensionMarshaller extends ExtensionMarshaler<ProviderOrganizationExtension> {
 
     private static final ProviderOrganizationExtensionMarshaller INSTANCE = new ProviderOrganizationExtensionMarshaller();
 

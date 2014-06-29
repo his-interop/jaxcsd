@@ -1,34 +1,30 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.NameMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Name implements Serializable{
-    
-    private List<String> commonNames=new ArrayList<String>();
+public class Name implements CsdMarshalable {
+
+    private List<String> commonNames = new ArrayList<String>();
     private String honorific;
     private String surname;
     private String suffix;
     private String forename;
-    private List<CodedType> otherNames=new ArrayList<CodedType>();
+    private List<CodedType> otherNames = new ArrayList<CodedType>();
 
     public Name() {
     }
-    
-    
 
     public Name(String honorific, String surname, String forename) {
         this.honorific = honorific;
         this.surname = surname;
         this.forename = forename;
     }
-    
-    
 
     public List<String> getCommonNames() {
         return commonNames;
@@ -37,8 +33,6 @@ public class Name implements Serializable{
     public void setCommonNames(List<String> commonNames) {
         this.commonNames = commonNames;
     }
-
-    
 
     public String getHonorific() {
         return honorific;
@@ -79,13 +73,17 @@ public class Name implements Serializable{
     public void setForename(String forename) {
         this.forename = forename;
     }
-    
-    public Name addCommonName(String commonName){
+
+    public Name addCommonName(String commonName) {
         this.commonNames.add(commonName);
         return this;
     }
-    
-    
-    
-    
+
+    public String marshal() {
+        return NameMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return NameMarshaler.get().marshal(this, elementName);
+    }
 }

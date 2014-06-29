@@ -17,6 +17,14 @@ public class OrganizationExtension extends Extension{
     public void setParentName(String parentName) {
         this.parentName = parentName;
     }
+
+    public String marshal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String marshal(String elementName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

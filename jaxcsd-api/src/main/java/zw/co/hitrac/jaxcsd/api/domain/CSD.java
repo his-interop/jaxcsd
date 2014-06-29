@@ -1,17 +1,20 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import zw.co.hitrac.jaxcsd.api.marshal.CSDMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.CsdMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class CSD implements CsdMarshallable {
+public class CSD implements CsdMarshalable {
 
     private OrganizationDirectory organizationDirectory;
     private ServiceDirectory serviceDirectory;
     private FacilityDirectory facilityDirectory;
     private ProviderDirectory providerDirectory;
+    
+    private Marshaler<CSD> marshaler=CsdMarshaler.get();
 
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
@@ -77,12 +80,27 @@ public class CSD implements CsdMarshallable {
         return this;
     }
 
-    public String marshal() {
-        return CSDMarshaller.get().marshal(this);
+    public String marshal(String elementName) {
+        return marshaler.marshal(this, elementName);
     }
-    
+
+    public String marshal() {
+        return marshaler.marshal(this);
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return marshal();
     }
+
+    public Marshaler<CSD> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<CSD> marshaler) {
+        this.marshaler = marshaler;
+    }
+    
+    
+    
 }

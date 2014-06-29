@@ -1,12 +1,12 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
+import zw.co.hitrac.jaxcsd.api.marshal.OtherIDMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class OtherID implements Serializable{
+public class OtherID implements CsdMarshalable{
     
     private String code;
     private String assigningAuthorityName;
@@ -18,8 +18,6 @@ public class OtherID implements Serializable{
         this.code = code;
         this.assigningAuthorityName = assigningAuthorityName;
     }
-    
-    
 
     public String getCode() {
         return code;
@@ -35,6 +33,14 @@ public class OtherID implements Serializable{
 
     public void setAssigningAuthorityName(String assigningAuthorityName) {
         this.assigningAuthorityName = assigningAuthorityName;
+    }
+
+    public String marshal() {
+        return OtherIDMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+       return OtherIDMarshaler.get().marshal(this, elementName);
     }
 
   

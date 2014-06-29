@@ -1,13 +1,13 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
 import java.util.Date;
+import zw.co.hitrac.jaxcsd.api.marshal.RecordMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Record implements Serializable{
+public class Record implements CsdMarshalable{
     
     private Date created;
     private Date updated;
@@ -57,6 +57,14 @@ public class Record implements Serializable{
 
     public void setSourceDirectory(String sourceDirectory) {
         this.sourceDirectory = sourceDirectory;
+    }
+
+    public String marshal() {
+       return RecordMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return RecordMarshaler.get().marshal(this, elementName);
     }
     
     

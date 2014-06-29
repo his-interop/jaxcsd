@@ -10,7 +10,7 @@ import zw.co.hitrac.jaxcsd.api.domain.Geocode;
  */
 public class GeocodeHandler {
 
-    static void handle(Geocode geocode, XMLStreamReader r) throws XMLStreamException {
+    public static void handle(Geocode geocode, XMLStreamReader r) throws XMLStreamException {
         while (r.hasNext()) {
             r.next();
 

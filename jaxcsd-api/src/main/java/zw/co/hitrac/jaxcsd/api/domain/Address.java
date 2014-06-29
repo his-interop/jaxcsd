@@ -1,14 +1,15 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.AddressLineMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.AddressMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Address implements Serializable {
+public class Address implements CsdMarshalable {
 
     private String type;
     private List<AddressLine> addressLines = new ArrayList<AddressLine>();
@@ -43,7 +44,15 @@ public class Address implements Serializable {
         return this;
     }
 
-    public static class AddressLine implements Serializable {
+    public String marshal() {
+       return AddressMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return AddressMarshaler.get().marshal(this,elementName);
+    }
+
+    public static class AddressLine implements CsdMarshalable {
 
         private String line;
         private String component;
@@ -71,5 +80,15 @@ public class Address implements Serializable {
         public void setComponent(String component) {
             this.component = component;
         }
+
+        public String marshal() {
+            return AddressLineMarshaler.get().marshal(this);
+        }
+
+        public String marshal(String elementName) {
+            return AddressLineMarshaler.get().marshal(this,elementName);
+        }
+        
+        
     }
 }

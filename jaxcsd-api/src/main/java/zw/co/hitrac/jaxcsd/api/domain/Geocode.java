@@ -1,13 +1,13 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
+import zw.co.hitrac.jaxcsd.api.marshal.GeocodeMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Geocode implements Serializable{
+public class Geocode implements CsdMarshalable{
     
     private BigDecimal latitude;
     private BigDecimal longitude;
@@ -59,6 +59,14 @@ public class Geocode implements Serializable{
 
     public void setCoordinateSystem(String coordinateSystem) {
         this.coordinateSystem = coordinateSystem;
+    }
+
+    public String marshal() {
+       return GeocodeMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+       return GeocodeMarshaler.get().marshal(this, elementName);
     }
     
     

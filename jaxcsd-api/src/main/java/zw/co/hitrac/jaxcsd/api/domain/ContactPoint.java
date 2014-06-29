@@ -1,12 +1,13 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.io.Serializable;
+import zw.co.hitrac.jaxcsd.api.marshal.ContactPointMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class ContactPoint implements Serializable{
+public class ContactPoint implements CsdMarshalable{
     
     private CodedType codedType;
     private String equipment;
@@ -52,6 +53,14 @@ public class ContactPoint implements Serializable{
 
     public void setCertificate(String certificate) {
         this.certificate = certificate;
+    }
+
+    public String marshal() {
+       return ContactPointMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return ContactPointMarshaler.get().marshal(this,elementName);
     }
     
     

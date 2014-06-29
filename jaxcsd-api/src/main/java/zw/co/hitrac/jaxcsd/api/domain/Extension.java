@@ -1,12 +1,10 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Charles Chigoriwa
  */
-public abstract class Extension implements Serializable {
+public abstract class Extension implements CsdMarshalable {
 
     private String type;
     private String oid;

@@ -2,12 +2,13 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import zw.co.hitrac.jaxcsd.api.marshal.CredentialMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Credential implements Serializable {
+public class Credential implements CsdMarshalable{
 
     private CodedType codedType;
     private String number;
@@ -70,5 +71,13 @@ public class Credential implements Serializable {
 
     public void setCredentialRenewalDate(Date credentialRenewalDate) {
         this.credentialRenewalDate = credentialRenewalDate;
+    }
+
+    public String marshal() {
+        return CredentialMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return CredentialMarshaler.get().marshal(this, elementName);
     }
 }

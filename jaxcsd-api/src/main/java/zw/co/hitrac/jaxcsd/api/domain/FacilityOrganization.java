@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.FacilityOrganizationMarshaler;
 
 /**
  *
@@ -43,6 +44,14 @@ public class FacilityOrganization extends UniqueID {
         return this;
     }
 
+    public String marshal() {
+        return FacilityOrganizationMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+      return FacilityOrganizationMarshaler.get().marshal(this, elementName);
+    }
+
     public static class FacilityOrganizationService extends UniqueID{
         
         private List<Name> names=new ArrayList<Name>();
@@ -80,6 +89,14 @@ public class FacilityOrganization extends UniqueID {
 
         public void setFreeBusyURI(String freeBusyURI) {
             this.freeBusyURI = freeBusyURI;
+        }
+
+        public String marshal() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public String marshal(String elementName) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
         
         

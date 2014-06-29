@@ -2,6 +2,8 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.OrganizationContactMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.OrganizationOtherNameMarshaler;
 
 /**
  *
@@ -13,9 +15,9 @@ public abstract class AbstractOrganization extends CsdEntity {
     protected String primaryName;
     protected List<OrganizationOtherName> otherNames = new ArrayList<OrganizationOtherName>();
     protected List<Address> addresses = new ArrayList<Address>();
-    protected List<OrganizationContact> contacts = new ArrayList<OrganizationContact>();    
-    protected List<ContactPoint> contactPoints=new ArrayList<ContactPoint>();    
-    protected List<CodedType> languages=new ArrayList<CodedType>();
+    protected List<OrganizationContact> contacts = new ArrayList<OrganizationContact>();
+    protected List<ContactPoint> contactPoints = new ArrayList<ContactPoint>();
+    protected List<CodedType> languages = new ArrayList<CodedType>();
 
     public List<OtherID> getOtherIDs() {
         return otherIDs;
@@ -72,37 +74,31 @@ public abstract class AbstractOrganization extends CsdEntity {
     public void setLanguages(List<CodedType> languages) {
         this.languages = languages;
     }
-    
-    
-    public AbstractOrganization addAddress(Address address){
+
+    public AbstractOrganization addAddress(Address address) {
         this.addresses.add(address);
         return this;
     }
-    
-    
-    public AbstractOrganization addContactPerson(Person person){
-        OrganizationContact contact=new OrganizationContact();
+
+    public AbstractOrganization addContactPerson(Person person) {
+        OrganizationContact contact = new OrganizationContact();
         contact.setPerson(person);
         this.contacts.add(contact);
         return this;
     }
-    
-    public AbstractOrganization addLanguage(String code,String codingSchema,String value){
+
+    public AbstractOrganization addLanguage(String code, String codingSchema, String value) {
         this.languages.add(new CodedType(code, codingSchema, value));
         return this;
     }
-    
-    public AbstractOrganization addContactPoint(ContactPoint contactPoint){
+
+    public AbstractOrganization addContactPoint(ContactPoint contactPoint) {
         this.contactPoints.add(contactPoint);
         return this;
     }
-    
-    
-    
-    
-    
-    
-     public static class OrganizationOtherName{
+
+    public static class OrganizationOtherName implements CsdMarshalable {
+
         private String value;
         private String lang;
 
@@ -121,11 +117,18 @@ public abstract class AbstractOrganization extends CsdEntity {
         public void setLang(String lang) {
             this.lang = lang;
         }
-        
-        
+
+        public String marshal() {
+            return OrganizationOtherNameMarshaler.get().marshal(this);
+        }
+
+        public String marshal(String elementName) {
+            return OrganizationOtherNameMarshaler.get().marshal(this, elementName);
+        }
     }
-    
-    public static class OrganizationContact{
+
+    public static class OrganizationContact implements CsdMarshalable {
+
         private UniqueID provider;
         private Person person;
 
@@ -144,6 +147,13 @@ public abstract class AbstractOrganization extends CsdEntity {
         public void setPerson(Person person) {
             this.person = person;
         }
-        
+
+        public String marshal() {
+            return OrganizationContactMarshaler.get().marshal(this);
+        }
+
+        public String marshal(String elementName) {
+            return OrganizationContactMarshaler.get().marshal(this, elementName);
+        }
     }
 }

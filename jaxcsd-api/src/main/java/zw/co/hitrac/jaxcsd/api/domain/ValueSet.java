@@ -2,13 +2,13 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import zw.co.hitrac.jaxcsd.api.marshal.ValueSetMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.ValueSetMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class ValueSet implements CsdMarshallable{
+public class ValueSet implements CsdMarshalable{
     
     private String id;
     private String displayName;
@@ -54,7 +54,11 @@ public class ValueSet implements CsdMarshallable{
     }
 
     public String marshal() {
-        return ValueSetMarshaller.get().marshal(this);
+        return ValueSetMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+       return ValueSetMarshaler.get().marshal(this, elementName);
     }
     
 }

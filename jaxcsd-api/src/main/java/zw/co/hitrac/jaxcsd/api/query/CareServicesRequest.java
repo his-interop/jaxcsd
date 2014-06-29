@@ -1,13 +1,13 @@
 package zw.co.hitrac.jaxcsd.api.query;
 
-import zw.co.hitrac.jaxcsd.api.domain.CsdMarshallable;
-import zw.co.hitrac.jaxcsd.api.marshal.CareServicesRequestMarshaller;
+import zw.co.hitrac.jaxcsd.api.domain.CsdMarshalable;
+import zw.co.hitrac.jaxcsd.api.marshal.CareServicesRequestMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class CareServicesRequest implements CsdMarshallable{
+public class CareServicesRequest implements CsdMarshalable{
     
     private Function function;
     private Expression expression;
@@ -36,7 +36,11 @@ public class CareServicesRequest implements CsdMarshallable{
     }
 
     public String marshal() {
-        return CareServicesRequestMarshaller.get().marshal(this);
+        return CareServicesRequestMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+       return CareServicesRequestMarshaler.get().marshal(this, elementName);
     }
     
     

@@ -3,13 +3,13 @@ package zw.co.hitrac.jaxcsd.api.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import zw.co.hitrac.jaxcsd.api.marshal.ConceptListMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.ConceptListMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class ConceptList implements CsdMarshallable{
+public class ConceptList implements CsdMarshalable{
     
     private String lang;
     
@@ -41,7 +41,11 @@ public class ConceptList implements CsdMarshallable{
     }
 
     public String marshal() {
-      return ConceptListMarshaller.get().marshal(this);
+      return ConceptListMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+      return ConceptListMarshaler.get().marshal(this,elementName);
     }
     
     

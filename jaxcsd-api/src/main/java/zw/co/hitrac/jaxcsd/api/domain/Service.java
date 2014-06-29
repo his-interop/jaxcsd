@@ -1,6 +1,6 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import zw.co.hitrac.jaxcsd.api.marshal.ServiceMarshaller;
+import zw.co.hitrac.jaxcsd.api.marshal.ServiceMarshaler;
 
 /**
  *
@@ -9,7 +9,11 @@ import zw.co.hitrac.jaxcsd.api.marshal.ServiceMarshaller;
 public class Service extends CsdEntity{
 
     public String marshal() {
-        return ServiceMarshaller.get().marshal(this);
+        return ServiceMarshaler.get().marshal(this);
+    }
+
+    public String marshal(String elementName) {
+        return ServiceMarshaler.get().marshal(this, elementName);
     }
     
    
