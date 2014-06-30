@@ -33,4 +33,8 @@ public class FacilityDirectory implements CsdMarshalable{
        return FacilityDirectoryMarshaler.get().marshal(this,elementName);
     }
     
+    public boolean isEmpty(){
+        return facilities==null || facilities.isEmpty();
+    }
+    
 }

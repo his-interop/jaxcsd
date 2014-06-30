@@ -5,7 +5,9 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.CSD;
 import zw.co.hitrac.jaxcsd.api.parser.CsdParser;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
+import zw.co.hitrac.jaxcsd.api.util.CsdElementConstants;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
 
 /**
@@ -24,8 +26,9 @@ public class CsdQueryClient {
             XMLInputFactory f = XMLInputFactory.newInstance();
             XMLStreamReader r = f.createXMLStreamReader(new ByteArrayInputStream(xmlResponseBody.getBytes()));
             CSD csd = new CSD();
+            CsdElement csdElement=new CsdElement(CsdElementConstants.CSD);
             CsdParserExtensions csdParserExtensions = callOptions != null ? callOptions.getCsdParserExtensions() : null;
-            csdParser.parse(csd, r, csdParserExtensions);
+            csdParser.parse(csd,csdElement, r, csdParserExtensions);
             return csd;
         } catch (Exception ex) {
             ex.printStackTrace(System.out);

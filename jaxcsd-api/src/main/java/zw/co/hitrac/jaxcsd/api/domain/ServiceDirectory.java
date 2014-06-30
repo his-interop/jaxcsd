@@ -34,4 +34,8 @@ public class ServiceDirectory implements CsdMarshalable{
         return ServiceDirectoryMarshaler.get().marshal(this, elementName);
     }
     
+    public boolean isEmpty(){
+        return services==null || services.isEmpty();
+    }
+    
 }

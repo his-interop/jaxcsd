@@ -11,7 +11,7 @@ import zw.co.hitrac.jaxcsd.api.domain.Provider;
 import zw.co.hitrac.jaxcsd.api.domain.ProviderFacilities;
 import zw.co.hitrac.jaxcsd.api.domain.ProviderOrganizations;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
-import zw.co.hitrac.jaxcsd.api.domain.ext.ProviderExtension;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
@@ -21,8 +21,9 @@ import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 public class ProviderParser extends AbstractCsdParser<Provider> {
 
     private DefaultProviderExtensionParser defaultProviderExtensionParser = new DefaultProviderExtensionParser();
+    
 
-    public void parse(Provider provider, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+    public void parse(Provider provider, CsdElement providerElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
 
         while (r.hasNext()) {
             r.next();
@@ -55,20 +56,20 @@ public class ProviderParser extends AbstractCsdParser<Provider> {
                 } else if ("specialty".equals(r.getLocalName())) {
                     CodedType codedType = HandlerUtils.getCodedType(r);
                     provider.getSpecialties().add(codedType);
-                } else if ("extension".equals(r.getLocalName())) {
+                } else if (extensionElement.elementEquals(r)) {
                     if (csdParserExtensions != null && csdParserExtensions.getProviderExtensionParser() != null) {
-                        csdParserExtensions.getProviderExtensionParser().parse(provider, r, csdParserExtensions);
+                        csdParserExtensions.getProviderExtensionParser().parse(provider, extensionElement, r, csdParserExtensions);
                     } else {
-                        this.defaultProviderExtensionParser.parse(provider, r, csdParserExtensions);
+                        this.defaultProviderExtensionParser.parse(provider, extensionElement, r, csdParserExtensions);
                     }
-                } else if ("record".equals(r.getLocalName())) {
+                } else if (recordElement.elementEquals(r)) {
                     Record record = HandlerUtils.getRecord(r);
                     provider.setRecord(record);
                 }
 
 
             } else if (r.isEndElement()) {
-                if ("provider".equals(r.getLocalName())) {
+                if (providerElement.elementEquals(r)) {
                     break;
                 }
             }

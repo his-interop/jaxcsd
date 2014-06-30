@@ -7,7 +7,9 @@ import zw.co.hitrac.jaxcsd.api.domain.FacilityDirectory;
 import zw.co.hitrac.jaxcsd.api.domain.OrganizationDirectory;
 import zw.co.hitrac.jaxcsd.api.domain.ProviderDirectory;
 import zw.co.hitrac.jaxcsd.api.domain.ServiceDirectory;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
+import static zw.co.hitrac.jaxcsd.api.util.CsdElementConstants.*;
 
 /**
  *
@@ -21,32 +23,35 @@ public class CsdParser extends AbstractCsdParser<CSD> {
     private ServiceDirectoryParser serviceDirectoryParser = new ServiceDirectoryParser();
 
     @Override
-    public void parse(final CSD csd, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+    public void parse(final CSD csd, CsdElement csdElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
 
         while (r.hasNext()) {
             r.next();
             if (r.isStartElement()) {
-                String localName = r.getLocalName();
-                if ("organizationDirectory".equals(localName)) {
+                if (organizationDirectoryElement.elementEquals(r)) {
                     if (csd != null) {
                         csd.setOrganizationDirectory(new OrganizationDirectory());
-                        organizationDirectoryParser.parse(csd.getOrganizationDirectory(), r, csdParserExtensions);
+                        organizationDirectoryParser.parse(csd.getOrganizationDirectory(), organizationDirectoryElement, r, csdParserExtensions);
                     }
-                } else if ("serviceDirectory".equals(localName)) {
+                } else if (serviceDirectoryElement.elementEquals(r)) {
                     if (csd != null) {
                         csd.setServiceDirectory(new ServiceDirectory());
-                        serviceDirectoryParser.parse(csd.getServiceDirectory(), r, csdParserExtensions);
+                        serviceDirectoryParser.parse(csd.getServiceDirectory(), serviceDirectoryElement, r, csdParserExtensions);
                     }
-                } else if ("facilityDirectory".equals(localName)) {
+                } else if (facilityDirectoryElement.elementEquals(r)) {
                     if (csd != null) {
                         csd.setFacilityDirectory(new FacilityDirectory());
-                        facilityDirectoryParser.parse(csd.getFacilityDirectory(), r, csdParserExtensions);
+                        facilityDirectoryParser.parse(csd.getFacilityDirectory(), facilityDirectoryElement, r, csdParserExtensions);
                     }
-                } else if ("providerDirectory".equals(localName)) {
+                } else if (providerDirectoryElement.elementEquals(r)) {
                     if (csd != null) {
                         csd.setProviderDirectory(new ProviderDirectory());
-                        providerDirectoryParser.parse(csd.getProviderDirectory(), r, csdParserExtensions);
+                        providerDirectoryParser.parse(csd.getProviderDirectory(), providerDirectoryElement, r, csdParserExtensions);
                     }
+                }
+            }else if(r.isEndElement()){
+                if(csdElement.elementEquals(r)){
+                    break;
                 }
             }
 
@@ -73,4 +78,9 @@ public class CsdParser extends AbstractCsdParser<CSD> {
     public void setServiceDirectoryParser(ServiceDirectoryParser serviceDirectoryParser) {
         this.serviceDirectoryParser = serviceDirectoryParser;
     }
+    
+    public static final CsdElement organizationDirectoryElement = new CsdElement(ORGANIZATION_DIRECTORY);
+    public static final CsdElement serviceDirectoryElement = new CsdElement(SERVICE_DIRECTORY);
+    public static final CsdElement facilityDirectoryElement = new CsdElement(FACILITY_DIRECTORY);
+    public static final CsdElement providerDirectoryElement = new CsdElement(PROVIDER_DIRECTORY);
 }

@@ -6,6 +6,7 @@ import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
 import zw.co.hitrac.jaxcsd.api.domain.Service;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
@@ -16,30 +17,26 @@ public class ServiceParser extends AbstractCsdParser<Service> {
 
     private DefaultServiceExtensionParser defaultServiceExtensionParser = new DefaultServiceExtensionParser();
 
-    public void parse(Service service, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
-
+    public void parse(Service service, CsdElement servicelement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
         while (r.hasNext()) {
             r.next();
-
             if (r.isStartElement()) {
-                if ("codedType".equals(r.getLocalName())) {
+                if (codedTypeElement.elementEquals(r)) {
                     CodedType codedType = HandlerUtils.getCodedType(r);
                     service.getCodedTypes().add(codedType);
-                } else if ("extension".equals(r.getLocalName())) {
+                } else if (extensionElement.elementEquals(r)) {
                     if (csdParserExtensions != null && csdParserExtensions.getServiceExtensionParser() != null) {
-                        csdParserExtensions.getServiceExtensionParser().parse(service, r, csdParserExtensions);
+                        csdParserExtensions.getServiceExtensionParser().parse(service, extensionElement, r, csdParserExtensions);
                     } else {
-                        this.defaultServiceExtensionParser.parse(service, r, csdParserExtensions);
+                        this.defaultServiceExtensionParser.parse(service, extensionElement, r, csdParserExtensions);
                     }
-                } else if ("record".equals(r.getLocalName())) {
+                } else if (recordElement.elementEquals(r)) {
                     Record record = HandlerUtils.getRecord(r);
                     service.setRecord(record);
                 }
 
-
-
             } else if (r.isEndElement()) {
-                if ("service".equals(r.getLocalName())) {
+                if (servicelement.elementEquals(r)) {
                     break;
                 }
             }

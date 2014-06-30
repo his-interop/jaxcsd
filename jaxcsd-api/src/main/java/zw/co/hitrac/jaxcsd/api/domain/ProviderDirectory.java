@@ -32,4 +32,8 @@ public class ProviderDirectory implements CsdMarshalable {
     public String marshal(String elementName) {
         return ProviderDirectoryMarshaler.get().marshal(this, elementName);
     }
+    
+    public boolean isEmpty(){
+        return providers==null || providers.isEmpty();
+    }
 }

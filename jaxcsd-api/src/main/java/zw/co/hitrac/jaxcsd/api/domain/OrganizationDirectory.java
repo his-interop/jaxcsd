@@ -32,4 +32,9 @@ public class OrganizationDirectory implements CsdMarshalable {
     public String marshal(String elementName) {
       return OrganizationDirectoryMarshaler.get().marshal(this, elementName);
     }
+    
+    public boolean isEmpty(){
+        return organizations==null || organizations.isEmpty();
+    }
+    
 }

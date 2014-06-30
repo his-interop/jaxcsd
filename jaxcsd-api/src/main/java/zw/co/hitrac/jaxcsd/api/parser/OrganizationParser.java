@@ -12,6 +12,8 @@ import zw.co.hitrac.jaxcsd.api.domain.Credential;
 import zw.co.hitrac.jaxcsd.api.domain.Organization;
 import zw.co.hitrac.jaxcsd.api.domain.OtherID;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
+import static zw.co.hitrac.jaxcsd.api.parser.AbstractCsdParser.extensionElement;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
@@ -22,7 +24,7 @@ public class OrganizationParser extends AbstractCsdParser<Organization>{
     
     private DefaultOrganizationExtensionParser defaultOrganizationExtensionParser=new DefaultOrganizationExtensionParser();
 
-    public void parse(Organization organization, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+    public void parse(Organization organization,CsdElement organizationElement,  XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
 
         while (r.hasNext()) {
             r.next();
@@ -64,13 +66,13 @@ public class OrganizationParser extends AbstractCsdParser<Organization>{
                 } else if("parent".equals(r.getLocalName())){
                     Organization parent=new Organization(r.getAttributeValue("", "oid"));
                     organization.setParent(parent);
-                } else if ("extension".equals(r.getLocalName())) {
+                } else if (extensionElement.elementEquals(r)) {
                     if(csdParserExtensions!=null && csdParserExtensions.getOrganizationExtensionParser()!=null){
-                        csdParserExtensions.getOrganizationExtensionParser().parse(organization, r, csdParserExtensions);
+                        csdParserExtensions.getOrganizationExtensionParser().parse(organization,extensionElement, r, csdParserExtensions);
                     }else{
-                        this.defaultOrganizationExtensionParser.parse(organization, r, csdParserExtensions);
+                        this.defaultOrganizationExtensionParser.parse(organization,extensionElement, r, csdParserExtensions);
                     }
-                } else if ("record".equals(r.getLocalName())) {
+                } else if (recordElement.elementEquals(r)) {
                     Record record = HandlerUtils.getRecord(r);
                     organization.setRecord(record);
                 }
@@ -78,7 +80,7 @@ public class OrganizationParser extends AbstractCsdParser<Organization>{
 
 
             } else if (r.isEndElement()) {
-                if ("organization".equals(r.getLocalName())) {
+                if (organizationElement.elementEquals(r)) {
                     break;
                 }
             }

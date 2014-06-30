@@ -4,7 +4,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.Organization;
 import zw.co.hitrac.jaxcsd.api.domain.OrganizationDirectory;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
+import static zw.co.hitrac.jaxcsd.api.util.CsdElementConstants.*;
 
 /**
  *
@@ -13,19 +15,21 @@ import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 public class OrganizationDirectoryParser extends AbstractCsdParser<OrganizationDirectory> {
 
     private OrganizationParser organizationParser = new OrganizationParser();
+    
+    public static final CsdElement organizationElement=new CsdElement(ORGANIZATION);
 
-    public void parse(OrganizationDirectory organizationDirectory, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+    public void parse(OrganizationDirectory organizationDirectory,CsdElement organizationDirectoryElement,  XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
         while (r.hasNext()) {
             r.next();
             if (r.isStartElement()) {
-                if ("organization".equals(r.getLocalName())) {
+                if (organizationElement.elementEquals(r)) {
                     Organization organization = new Organization();
                     organization.setOid(r.getAttributeValue("", "oid"));
                     organizationDirectory.getOrganizations().add(organization);
-                    organizationParser.parse(organization, r, csdParserExtensions);
+                    organizationParser.parse(organization,organizationElement,r, csdParserExtensions);
                 }
             } else if (r.isEndElement()) {
-                if ("organizationDirectory".equals(r.getLocalName())) {
+                if (organizationDirectoryElement.elementEquals(r)) {
                     break;
                 }
             }

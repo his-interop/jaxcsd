@@ -13,17 +13,19 @@ import zw.co.hitrac.jaxcsd.api.domain.Geocode;
 import zw.co.hitrac.jaxcsd.api.domain.OperatingHours;
 import zw.co.hitrac.jaxcsd.api.domain.OtherID;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
+import static zw.co.hitrac.jaxcsd.api.parser.AbstractCsdParser.extensionElement;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class FacilityParser extends AbstractCsdParser<Facility>{
-    
-    private DefaultFacilityExtensionParser defaultFacilityExtensionParser=new DefaultFacilityExtensionParser();
+public class FacilityParser extends AbstractCsdParser<Facility> {
 
-    public  void parse(Facility facility, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+    private DefaultFacilityExtensionParser defaultFacilityExtensionParser = new DefaultFacilityExtensionParser();
+
+    public void parse(Facility facility, CsdElement facilityEement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
 
         while (r.hasNext()) {
             r.next();
@@ -65,16 +67,16 @@ public class FacilityParser extends AbstractCsdParser<Facility>{
                     facility.setFacilityOrganizations(facilityOrganizations);
                     FacilityOrganizationsHandler.handle(facilityOrganizations, r);
                 } else if ("operatingHours".equals(r.getLocalName())) {
-                    OperatingHours operatingHours=new OperatingHours();
+                    OperatingHours operatingHours = new OperatingHours();
                     facility.getOperatingHours().add(operatingHours);
                     OperatingHoursHandler.handle(operatingHours, r);
-                }else if ("extension".equals(r.getLocalName())) {
-                    if(csdParserExtensions!=null && csdParserExtensions.getFacilityExtensionParser()!=null){
-                        csdParserExtensions.getFacilityExtensionParser().parse(facility, r, csdParserExtensions);
-                    }else{
-                        this.defaultFacilityExtensionParser.parse(facility, r, csdParserExtensions);
-                    }                   
-                } else if ("record".equals(r.getLocalName())) {
+                } else if (extensionElement.elementEquals(r)) {
+                    if (csdParserExtensions != null && csdParserExtensions.getFacilityExtensionParser() != null) {
+                        csdParserExtensions.getFacilityExtensionParser().parse(facility, extensionElement, r, csdParserExtensions);
+                    } else {
+                        this.defaultFacilityExtensionParser.parse(facility, extensionElement, r, csdParserExtensions);
+                    }
+                } else if (recordElement.elementEquals(r)) {
                     Record record = HandlerUtils.getRecord(r);
                     facility.setRecord(record);
                 }
@@ -82,7 +84,7 @@ public class FacilityParser extends AbstractCsdParser<Facility>{
 
 
             } else if (r.isEndElement()) {
-                if ("facility".equals(r.getLocalName())) {
+                if (facilityEement.elementEquals(r)) {
                     break;
                 }
             }
@@ -92,6 +94,4 @@ public class FacilityParser extends AbstractCsdParser<Facility>{
     public void setDefaultFacilityExtensionParser(DefaultFacilityExtensionParser defaultFacilityExtensionParser) {
         this.defaultFacilityExtensionParser = defaultFacilityExtensionParser;
     }
-    
-    
 }
