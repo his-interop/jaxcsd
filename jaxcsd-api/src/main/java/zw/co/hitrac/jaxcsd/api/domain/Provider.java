@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.ProviderMarshaler;
 
 /**
@@ -17,6 +18,7 @@ public class Provider extends CsdEntity {
     private ProviderFacilities providerFacilities;
     private List<Credential> credentials = new ArrayList<Credential>();
     private List<CodedType> specialties = new ArrayList<CodedType>();
+    private Marshaler<Provider> marshaler = ProviderMarshaler.get();
 
     public Provider() {
     }
@@ -81,6 +83,14 @@ public class Provider extends CsdEntity {
         this.specialties = specialties;
     }
 
+    public Marshaler<Provider> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<Provider> marshaler) {
+        this.marshaler = marshaler;
+    }
+
     public Provider addOtherID(String code, String assigningAuthorityName) {
         OtherID otherID = new OtherID();
         otherID.setCode(code);
@@ -121,11 +131,11 @@ public class Provider extends CsdEntity {
     }
 
     public String marshal() {
-        return ProviderMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return ProviderMarshaler.get().marshal(this, elementName);
+        return marshaler.marshal(this, elementName);
     }
 
     public Name getTopName() {

@@ -1,8 +1,8 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.ProviderOrganizationsMarshaler;
 
 /**
@@ -12,6 +12,7 @@ import zw.co.hitrac.jaxcsd.api.marshal.ProviderOrganizationsMarshaler;
 public class ProviderOrganizations implements CsdMarshalable {
 
     private List<ProviderOrganization> providerOrganizations = new ArrayList<ProviderOrganization>();
+    private Marshaler<ProviderOrganizations> marshaler = ProviderOrganizationsMarshaler.get();
 
     public List<ProviderOrganization> getProviderOrganizations() {
         return providerOrganizations;
@@ -20,17 +21,25 @@ public class ProviderOrganizations implements CsdMarshalable {
     public void setProviderOrganizations(List<ProviderOrganization> providerOrganizations) {
         this.providerOrganizations = providerOrganizations;
     }
-    
-    public ProviderOrganizations addProviderOrganization(ProviderOrganization providerOrganization){
+
+    public Marshaler<ProviderOrganizations> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<ProviderOrganizations> marshaler) {
+        this.marshaler = marshaler;
+    }
+
+    public ProviderOrganizations addProviderOrganization(ProviderOrganization providerOrganization) {
         this.providerOrganizations.add(providerOrganization);
         return this;
     }
 
     public String marshal() {
-       return ProviderOrganizationsMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-       return ProviderOrganizationsMarshaler.get().marshal(this, elementName);
+        return marshaler.marshal(this, elementName);
     }
 }

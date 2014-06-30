@@ -1,6 +1,7 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
 import zw.co.hitrac.jaxcsd.api.marshal.CodedTypeMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
@@ -11,6 +12,7 @@ public class CodedType implements CsdMarshalable {
     private String code;
     private String codingSchema;
     private String value = "";
+    private Marshaler<CodedType> marshaler = CodedTypeMarshaler.get();
 
     public CodedType() {
     }
@@ -50,10 +52,18 @@ public class CodedType implements CsdMarshalable {
     }
 
     public String marshal() {
-        return CodedTypeMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return CodedTypeMarshaler.get().marshal(this,elementName);
+        return marshaler.marshal(this, elementName);
+    }
+
+    public Marshaler<CodedType> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<CodedType> marshaler) {
+        this.marshaler = marshaler;
     }
 }

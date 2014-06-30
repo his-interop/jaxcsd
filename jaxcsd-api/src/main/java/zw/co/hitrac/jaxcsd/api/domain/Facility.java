@@ -3,6 +3,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 import java.util.ArrayList;
 import java.util.List;
 import zw.co.hitrac.jaxcsd.api.marshal.FacilityMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
@@ -10,20 +11,17 @@ import zw.co.hitrac.jaxcsd.api.marshal.FacilityMarshaler;
  */
 public class Facility extends AbstractOrganization {
 
+    private FacilityOrganizations facilityOrganizations = new FacilityOrganizations();
+    private List<OperatingHours> operatingHours = new ArrayList<OperatingHours>();
+    private Geocode geocode;
+    private Marshaler<Facility> marshaler = FacilityMarshaler.get();
+
     public Facility() {
     }
 
     public Facility(String oid) {
-        this.oid=oid;
+        this.oid = oid;
     }
-    
-    
-    
-    
-    private FacilityOrganizations facilityOrganizations=new FacilityOrganizations();
-    private List<OperatingHours> operatingHours=new ArrayList<OperatingHours>();
-    private Geocode geocode;
-    
 
     public FacilityOrganizations getFacilityOrganizations() {
         return facilityOrganizations;
@@ -48,24 +46,29 @@ public class Facility extends AbstractOrganization {
     public void setGeocode(Geocode geocode) {
         this.geocode = geocode;
     }
-    
-    public Facility addFacilityOrganization(FacilityOrganization facilityOrganization){
-        if(facilityOrganizations==null){
-            facilityOrganizations=new FacilityOrganizations();
+
+    public Facility addFacilityOrganization(FacilityOrganization facilityOrganization) {
+        if (facilityOrganizations == null) {
+            facilityOrganizations = new FacilityOrganizations();
         }
-        
+
         facilityOrganizations.addFacilityOrganization(facilityOrganization);
         return this;
     }
-    
-        
-  
+
     public String marshal() {
-       return FacilityMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return FacilityMarshaler.get().marshal(this,elementName);
+        return marshaler.marshal(this, elementName);
     }
 
+    public Marshaler<Facility> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<Facility> marshaler) {
+        this.marshaler = marshaler;
+    }
 }

@@ -2,17 +2,19 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.math.BigDecimal;
 import zw.co.hitrac.jaxcsd.api.marshal.GeocodeMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Geocode implements CsdMarshalable{
-    
+public class Geocode implements CsdMarshalable {
+
     private BigDecimal latitude;
     private BigDecimal longitude;
     private BigDecimal altitude;
     private String coordinateSystem;
+    private Marshaler<Geocode> marshaler = GeocodeMarshaler.get();
 
     public Geocode() {
     }
@@ -62,12 +64,18 @@ public class Geocode implements CsdMarshalable{
     }
 
     public String marshal() {
-       return GeocodeMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-       return GeocodeMarshaler.get().marshal(this, elementName);
+        return marshaler.marshal(this, elementName);
     }
-    
-    
+
+    public Marshaler<Geocode> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<Geocode> marshaler) {
+        this.marshaler = marshaler;
+    }
 }

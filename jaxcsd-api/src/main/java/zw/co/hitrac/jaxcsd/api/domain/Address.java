@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import zw.co.hitrac.jaxcsd.api.marshal.AddressLineMarshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.AddressMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
@@ -13,6 +14,7 @@ public class Address implements CsdMarshalable {
 
     private String type;
     private List<AddressLine> addressLines = new ArrayList<AddressLine>();
+    private Marshaler<Address> marshaler = AddressMarshaler.get();
 
     public Address() {
     }
@@ -20,8 +22,6 @@ public class Address implements CsdMarshalable {
     public Address(String type) {
         this.type = type;
     }
-    
-    
 
     public String getType() {
         return type;
@@ -45,22 +45,23 @@ public class Address implements CsdMarshalable {
     }
 
     public String marshal() {
-       return AddressMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return AddressMarshaler.get().marshal(this,elementName);
+        return marshaler.marshal(this, elementName);
     }
 
     public static class AddressLine implements CsdMarshalable {
 
         private String line;
         private String component;
+        private Marshaler<AddressLine> marshaler = AddressLineMarshaler.get();
 
         public AddressLine() {
         }
 
-        public AddressLine(String component,String line) {
+        public AddressLine(String component, String line) {
             this.line = line;
             this.component = component;
         }
@@ -82,13 +83,19 @@ public class Address implements CsdMarshalable {
         }
 
         public String marshal() {
-            return AddressLineMarshaler.get().marshal(this);
+            return marshaler.marshal(this);
         }
 
         public String marshal(String elementName) {
-            return AddressLineMarshaler.get().marshal(this,elementName);
+            return marshaler.marshal(this, elementName);
         }
-        
-        
+
+        public Marshaler<AddressLine> getMarshaler() {
+            return marshaler;
+        }
+
+        public void setMarshaler(Marshaler<AddressLine> marshaler) {
+            this.marshaler = marshaler;
+        }
     }
 }

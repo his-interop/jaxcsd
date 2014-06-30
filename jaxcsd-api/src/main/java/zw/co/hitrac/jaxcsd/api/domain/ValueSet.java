@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.ValueSetMarshaler;
 
 /**
@@ -13,8 +14,8 @@ public class ValueSet implements CsdMarshalable{
     private String id;
     private String displayName;
     private String version;
-    
     private List<ConceptList> conceptLists=new ArrayList<ConceptList>();
+    private Marshaler<ValueSet> marshaler = ValueSetMarshaler.get();
 
     public String getId() {
         return id;
@@ -47,6 +48,14 @@ public class ValueSet implements CsdMarshalable{
     public void setVersion(String version) {
         this.version = version;
     }
+
+    public Marshaler<ValueSet> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<ValueSet> marshaler) {
+        this.marshaler = marshaler;
+    }
     
     public ValueSet addConceptList(ConceptList conceptList){
         this.conceptLists.add(conceptList);
@@ -54,11 +63,10 @@ public class ValueSet implements CsdMarshalable{
     }
 
     public String marshal() {
-        return ValueSetMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-       return ValueSetMarshaler.get().marshal(this, elementName);
+       return marshaler.marshal(this, elementName);
     }
-    
 }

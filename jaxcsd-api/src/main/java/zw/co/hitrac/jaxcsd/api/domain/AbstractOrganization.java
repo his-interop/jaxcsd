@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.OrganizationContactMarshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.OrganizationOtherNameMarshaler;
 
@@ -18,6 +19,7 @@ public abstract class AbstractOrganization extends CsdEntity {
     protected List<OrganizationContact> contacts = new ArrayList<OrganizationContact>();
     protected List<ContactPoint> contactPoints = new ArrayList<ContactPoint>();
     protected List<CodedType> languages = new ArrayList<CodedType>();
+    
 
     public List<OtherID> getOtherIDs() {
         return otherIDs;
@@ -101,6 +103,7 @@ public abstract class AbstractOrganization extends CsdEntity {
 
         private String value;
         private String lang;
+        private Marshaler<OrganizationOtherName> marshaler = OrganizationOtherNameMarshaler.get();
 
         public String getValue() {
             return value;
@@ -118,12 +121,20 @@ public abstract class AbstractOrganization extends CsdEntity {
             this.lang = lang;
         }
 
+        public Marshaler<OrganizationOtherName> getMarshaler() {
+            return marshaler;
+        }
+
+        public void setMarshaler(Marshaler<OrganizationOtherName> marshaler) {
+            this.marshaler = marshaler;
+        }
+
         public String marshal() {
-            return OrganizationOtherNameMarshaler.get().marshal(this);
+            return marshaler.marshal(this);
         }
 
         public String marshal(String elementName) {
-            return OrganizationOtherNameMarshaler.get().marshal(this, elementName);
+            return marshaler.marshal(this, elementName);
         }
     }
 
@@ -131,6 +142,7 @@ public abstract class AbstractOrganization extends CsdEntity {
 
         private UniqueID provider;
         private Person person;
+        private Marshaler<OrganizationContact> marshaler = OrganizationContactMarshaler.get();
 
         public UniqueID getProvider() {
             return provider;
@@ -148,12 +160,20 @@ public abstract class AbstractOrganization extends CsdEntity {
             this.person = person;
         }
 
+        public Marshaler<OrganizationContact> getMarshaler() {
+            return marshaler;
+        }
+
+        public void setMarshaler(Marshaler<OrganizationContact> marshaler) {
+            this.marshaler = marshaler;
+        }
+
         public String marshal() {
-            return OrganizationContactMarshaler.get().marshal(this);
+            return marshaler.marshal(this);
         }
 
         public String marshal(String elementName) {
-            return OrganizationContactMarshaler.get().marshal(this, elementName);
+            return marshaler.marshal(this, elementName);
         }
     }
 }

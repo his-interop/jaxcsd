@@ -1,15 +1,17 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.OtherIDMarshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class OtherID implements CsdMarshalable{
-    
+public class OtherID implements CsdMarshalable {
+
     private String code;
     private String assigningAuthorityName;
+    private Marshaler<OtherID> marshaler = OtherIDMarshaler.get();
 
     public OtherID() {
     }
@@ -36,12 +38,18 @@ public class OtherID implements CsdMarshalable{
     }
 
     public String marshal() {
-        return OtherIDMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-       return OtherIDMarshaler.get().marshal(this, elementName);
+        return marshaler.marshal(this, elementName);
     }
 
-  
+    public Marshaler<OtherID> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<OtherID> marshaler) {
+        this.marshaler = marshaler;
+    }
 }

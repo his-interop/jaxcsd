@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 import zw.co.hitrac.jaxcsd.api.marshal.NameMarshaler;
 
 /**
@@ -16,6 +17,7 @@ public class Name implements CsdMarshalable {
     private String suffix;
     private String forename;
     private List<CodedType> otherNames = new ArrayList<CodedType>();
+    private Marshaler<Name> marshaler = NameMarshaler.get();
 
     public Name() {
     }
@@ -80,10 +82,18 @@ public class Name implements CsdMarshalable {
     }
 
     public String marshal() {
-        return NameMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return NameMarshaler.get().marshal(this, elementName);
+        return marshaler.marshal(this, elementName);
+    }
+
+    public Marshaler<Name> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<Name> marshaler) {
+        this.marshaler = marshaler;
     }
 }

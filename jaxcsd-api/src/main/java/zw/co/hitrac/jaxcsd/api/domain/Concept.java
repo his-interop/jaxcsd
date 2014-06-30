@@ -1,18 +1,18 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
 import zw.co.hitrac.jaxcsd.api.marshal.ConceptMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class Concept implements CsdMarshalable{
-    
-   
-    
+public class Concept implements CsdMarshalable {
+
     private String code;
     private String displayName;
     private String codeSystem;
+    private Marshaler<Concept> marshaler = ConceptMarshaler.get();
 
     public Concept() {
     }
@@ -22,8 +22,6 @@ public class Concept implements CsdMarshalable{
         this.displayName = displayName;
         this.codeSystem = codeSystem;
     }
-    
-    
 
     public String getCode() {
         return code;
@@ -50,12 +48,18 @@ public class Concept implements CsdMarshalable{
     }
 
     public String marshal() {
-        return ConceptMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return ConceptMarshaler.get().marshal(this,elementName);
+        return marshaler.marshal(this, elementName);
     }
-    
-    
+
+    public Marshaler<Concept> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<Concept> marshaler) {
+        this.marshaler = marshaler;
+    }
 }

@@ -3,25 +3,25 @@ package zw.co.hitrac.jaxcsd.api.domain;
 import java.util.ArrayList;
 import java.util.List;
 import zw.co.hitrac.jaxcsd.api.marshal.FacilityOrganizationMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class FacilityOrganization extends UniqueID {    
-     
-    private List<FacilityOrganizationService> services=new ArrayList<FacilityOrganizationService>();
-    private List<Extension> extensions=new ArrayList<Extension>();
+public class FacilityOrganization extends UniqueID {
+
+    private List<FacilityOrganizationService> services = new ArrayList<FacilityOrganizationService>();
+    private List<Extension> extensions = new ArrayList<Extension>();
+    private Marshaler<FacilityOrganization> marshaler = FacilityOrganizationMarshaler.get();
 
     public FacilityOrganization() {
     }
 
-    
-    
     public FacilityOrganization(String oid) {
         super(oid);
     }
-    
+
     public List<FacilityOrganizationService> getServices() {
         return services;
     }
@@ -37,26 +37,33 @@ public class FacilityOrganization extends UniqueID {
     public void setExtensions(List<Extension> extensions) {
         this.extensions = extensions;
     }
-    
-   
-    public FacilityOrganization addExtension(Extension extension){
+
+    public FacilityOrganization addExtension(Extension extension) {
         this.extensions.add(extension);
         return this;
     }
 
     public String marshal() {
-        return FacilityOrganizationMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-      return FacilityOrganizationMarshaler.get().marshal(this, elementName);
+        return marshaler.marshal(this, elementName);
     }
 
-    public static class FacilityOrganizationService extends UniqueID{
-        
-        private List<Name> names=new ArrayList<Name>();
-        private List<CodedType> languages=new ArrayList<CodedType>();
-        private List<OperatingHours> operatingHours=new ArrayList<OperatingHours>();
+    public Marshaler<FacilityOrganization> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<FacilityOrganization> marshaler) {
+        this.marshaler = marshaler;
+    }
+
+    public static class FacilityOrganizationService extends UniqueID {
+
+        private List<Name> names = new ArrayList<Name>();
+        private List<CodedType> languages = new ArrayList<CodedType>();
+        private List<OperatingHours> operatingHours = new ArrayList<OperatingHours>();
         private String freeBusyURI;
 
         public List<Name> getNames() {
@@ -98,9 +105,5 @@ public class FacilityOrganization extends UniqueID {
         public String marshal(String elementName) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-        
-        
-        
-        
     }
 }

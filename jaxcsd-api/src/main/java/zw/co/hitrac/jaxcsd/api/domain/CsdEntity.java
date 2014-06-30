@@ -37,8 +37,6 @@ public abstract class CsdEntity extends UniqueID implements CsdMarshalable{
         this.extensions = extensions;
     }
     
-    
-    
     public CsdEntity addCodedType(String code,String codingSchema,String value){
         CodedType codedType=new CodedType(code, codingSchema, value);
         this.codedTypes.add(codedType);

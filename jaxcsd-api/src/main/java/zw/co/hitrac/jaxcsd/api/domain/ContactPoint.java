@@ -1,18 +1,19 @@
 package zw.co.hitrac.jaxcsd.api.domain;
 
-import java.io.Serializable;
 import zw.co.hitrac.jaxcsd.api.marshal.ContactPointMarshaler;
+import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class ContactPoint implements CsdMarshalable{
-    
+public class ContactPoint implements CsdMarshalable {
+
     private CodedType codedType;
     private String equipment;
     private String purpose;
     private String certificate;
+    private Marshaler<ContactPoint> marshaler = ContactPointMarshaler.get();
 
     public ContactPoint() {
     }
@@ -20,8 +21,6 @@ public class ContactPoint implements CsdMarshalable{
     public ContactPoint(CodedType codedType) {
         this.codedType = codedType;
     }
-    
-    
 
     public CodedType getCodedType() {
         return codedType;
@@ -56,12 +55,18 @@ public class ContactPoint implements CsdMarshalable{
     }
 
     public String marshal() {
-       return ContactPointMarshaler.get().marshal(this);
+        return marshaler.marshal(this);
     }
 
     public String marshal(String elementName) {
-        return ContactPointMarshaler.get().marshal(this,elementName);
+        return marshaler.marshal(this, elementName);
     }
-    
-    
+
+    public Marshaler<ContactPoint> getMarshaler() {
+        return marshaler;
+    }
+
+    public void setMarshaler(Marshaler<ContactPoint> marshaler) {
+        this.marshaler = marshaler;
+    }
 }
