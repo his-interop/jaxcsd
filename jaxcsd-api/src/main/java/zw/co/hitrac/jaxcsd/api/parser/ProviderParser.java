@@ -1,6 +1,7 @@
 package zw.co.hitrac.jaxcsd.api.parser;
 
-import zw.co.hitrac.jaxcsd.api.xp.*;
+import zw.co.hitrac.jaxcsd.api.parser.util.HandlerUtils;
+import zw.co.hitrac.jaxcsd.api.parser.ext.DefaultProviderExtensionParser;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
@@ -13,6 +14,7 @@ import zw.co.hitrac.jaxcsd.api.domain.ProviderOrganizations;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
+import zw.co.hitrac.jaxcsd.api.util.CsdElementConstants;
 
 /**
  *
@@ -21,7 +23,9 @@ import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 public class ProviderParser extends AbstractCsdParser<Provider> {
 
     private DefaultProviderExtensionParser defaultProviderExtensionParser = new DefaultProviderExtensionParser();
-    
+    private PersonParser personParser = new PersonParser();
+    private ProviderOrganizationsParser providerOrganizationsParser = new ProviderOrganizationsParser();
+    private ProviderFacilitiesParser providerFacilitiesParser = new ProviderFacilitiesParser();
 
     public void parse(Provider provider, CsdElement providerElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
 
@@ -35,21 +39,21 @@ public class ProviderParser extends AbstractCsdParser<Provider> {
                 } else if ("codedType".equals(r.getLocalName())) {
                     CodedType codedType = HandlerUtils.getCodedType(r);
                     provider.getCodedTypes().add(codedType);
-                } else if ("demographic".equals(r.getLocalName())) {
+                } else if (DEMOGRAPHIC_ELEMENT.elementEquals(r)) {
                     Person demographic = new Person();
                     provider.setDemographic(demographic);
-                    DemographicHandler.handle(demographic, r);
+                    personParser.parse(demographic, DEMOGRAPHIC_ELEMENT, r, csdParserExtensions);
                 } else if ("language".equals(r.getLocalName())) {
                     CodedType codedType = HandlerUtils.getCodedType(r);
                     provider.getLanguages().add(codedType);
-                } else if ("organizations".equals(r.getLocalName())) {
+                } else if (ORGANIZATIONS_ELEMENT.elementEquals(r)) {
                     ProviderOrganizations providerOrganizations = new ProviderOrganizations();
                     provider.setProviderOrganizations(providerOrganizations);
-                    ProviderOrganizationsHandler.handle(providerOrganizations, r);
-                } else if ("facilities".equals(r.getLocalName())) {
+                    providerOrganizationsParser.parse(providerOrganizations, ORGANIZATIONS_ELEMENT, r, csdParserExtensions);
+                } else if (FACILITIES_ELEMENT.elementEquals(r)) {
                     ProviderFacilities providerFacilities = new ProviderFacilities();
                     provider.setProviderFacilities(providerFacilities);
-                    ProviderFacilitiesHandler.handle(providerFacilities, r);
+                    providerFacilitiesParser.parse(providerFacilities, FACILITIES_ELEMENT, r, csdParserExtensions);
                 } else if ("credential".equals(r.getLocalName())) {
                     Credential credential = HandlerUtils.getCredential(r);
                     provider.addCredential(credential);
@@ -79,4 +83,26 @@ public class ProviderParser extends AbstractCsdParser<Provider> {
     public DefaultProviderExtensionParser getDefaultProviderExtensionParser() {
         return defaultProviderExtensionParser;
     }
+
+    public void setDefaultProviderExtensionParser(DefaultProviderExtensionParser defaultProviderExtensionParser) {
+        this.defaultProviderExtensionParser = defaultProviderExtensionParser;
+    }
+
+    public void setPersonParser(PersonParser personParser) {
+        this.personParser = personParser;
+    }
+
+    public void setProviderOrganizationsParser(ProviderOrganizationsParser providerOrganizationsParser) {
+        this.providerOrganizationsParser = providerOrganizationsParser;
+    }
+
+    public void setProviderFacilitiesParser(ProviderFacilitiesParser providerFacilitiesParser) {
+        this.providerFacilitiesParser = providerFacilitiesParser;
+    }
+
+    
+    
+    public static final CsdElement ORGANIZATIONS_ELEMENT = new CsdElement(CsdElementConstants.ORGANIZATIONS);
+    public static final CsdElement FACILITIES_ELEMENT = new CsdElement(CsdElementConstants.FACILITIES);
+    public static final CsdElement DEMOGRAPHIC_ELEMENT = new CsdElement(CsdElementConstants.DEMOGRAPHIC);
 }

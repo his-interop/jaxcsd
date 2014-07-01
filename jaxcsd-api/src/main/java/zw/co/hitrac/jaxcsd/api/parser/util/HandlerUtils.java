@@ -1,4 +1,4 @@
-package zw.co.hitrac.jaxcsd.api.xp;
+package zw.co.hitrac.jaxcsd.api.parser.util;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -10,6 +10,8 @@ import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import zw.co.hitrac.jaxcsd.api.domain.Credential;
 import zw.co.hitrac.jaxcsd.api.domain.OtherID;
 import zw.co.hitrac.jaxcsd.api.domain.Record;
+import zw.co.hitrac.jaxcsd.api.parser.CredentialParser;
+import zw.co.hitrac.jaxcsd.api.util.CsdElementConstants;
 
 /**
  *
@@ -41,11 +43,10 @@ public class HandlerUtils {
 
     public static Credential getCredential(XMLStreamReader r) throws XMLStreamException {
         Credential credential = new Credential();
-        try {
-            CredentialHandler.handle(credential, r);
-        } catch (ParseException ex) {
-            throw new RuntimeException(ex);
-        }
+        //TODO: to assemble this parser in a container/factory
+        CredentialParser credentialParser = new CredentialParser();
+        //TODO: to parameterize
+        credentialParser.parse(credential, new CsdElement(CsdElementConstants.CREDENTIAL), r, null);
         return credential;
     }
 
@@ -63,8 +64,8 @@ public class HandlerUtils {
             return null;
         }
     }
-    
-     public static BigDecimal getBigDecimal(XMLStreamReader r) throws XMLStreamException {
+
+    public static BigDecimal getBigDecimal(XMLStreamReader r) throws XMLStreamException {
         r.next();
         if (r.isCharacters()) {
             return new BigDecimal(r.getText());

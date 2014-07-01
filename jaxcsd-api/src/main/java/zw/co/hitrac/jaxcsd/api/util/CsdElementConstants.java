@@ -36,6 +36,13 @@ public class CsdElementConstants {
     public static final String SERVICE_DIRECTORY="serviceDirectory";
     public static final String SERVICE="service";
     public static final String VALUE_SET="ValueSet";
+    public static final String GENDER="gender";
+    public static final String RETRIEVE_VALUE_SET_RESPONSE="RetrieveValueSetResponse";
+    public static final String OPERATING_HOURS="operatingHours";
+    public static final String DEMOGRAPHIC="demographic";
+    
+    
+    
     
     
     

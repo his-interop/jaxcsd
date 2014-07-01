@@ -1,17 +1,21 @@
-package zw.co.hitrac.jaxcsd.api.xp;
+package zw.co.hitrac.jaxcsd.api.parser;
 
+import zw.co.hitrac.jaxcsd.api.parser.util.HandlerUtils;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.Geocode;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class GeocodeHandler {
+public class GeocodeParser extends AbstractCsdParser<Geocode> {
 
-    public static void handle(Geocode geocode, XMLStreamReader r) throws XMLStreamException {
-        while (r.hasNext()) {
+    @Override
+    public void parse(final Geocode geocode, CsdElement geoCodeElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+         while (r.hasNext()) {
             r.next();
 
             if (r.isStartElement()) {
@@ -25,7 +29,7 @@ public class GeocodeHandler {
                     geocode.setCoordinateSystem(HandlerUtils.getCharacters(r));
                 }
             } else if (r.isEndElement()) {
-                if ("geocode".equals(r.getLocalName())) {
+                if (geoCodeElement.elementEquals(r)) {
                     break;
                 }
             }

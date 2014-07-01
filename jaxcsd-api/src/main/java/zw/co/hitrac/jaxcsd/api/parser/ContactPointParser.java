@@ -1,17 +1,20 @@
-package zw.co.hitrac.jaxcsd.api.xp;
+package zw.co.hitrac.jaxcsd.api.parser;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import zw.co.hitrac.jaxcsd.api.domain.ContactPoint;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class ContactPointHandler {
-
-    public static void handle(ContactPoint contactPoint, XMLStreamReader r) throws XMLStreamException {
+public class ContactPointParser extends AbstractCsdParser<ContactPoint> {
+    
+    @Override
+    public void parse(ContactPoint contactPoint, CsdElement contactPointElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
         while (r.hasNext()) {
             r.next();
             if (r.isStartElement()) {
@@ -22,26 +25,26 @@ public class ContactPointHandler {
                     r.next();
                     if (r.isCharacters()) {
                         codedType.setValue(r.getText());
-                    }                    
+                    }
                     contactPoint.setCodedType(codedType);
-                }else if ("equipment".equals(r.getLocalName())) {
+                } else if ("equipment".equals(r.getLocalName())) {
                     r.next();
                     if (r.isCharacters()) {
                         contactPoint.setEquipment(r.getText());
                     }
-                }else if ("purpose".equals(r.getLocalName())) {
+                } else if ("purpose".equals(r.getLocalName())) {
                     r.next();
                     if (r.isCharacters()) {
                         contactPoint.setPurpose(r.getText());
                     }
-                }else if ("certificate".equals(r.getLocalName())) {
+                } else if ("certificate".equals(r.getLocalName())) {
                     r.next();
                     if (r.isCharacters()) {
                         contactPoint.setCertificate(r.getText());
                     }
                 }
             } else if (r.isEndElement()) {
-                if ("contactPoint".equals(r.getLocalName())) {
+                if (contactPointElement.elementEquals(r)) {
                     break;
                 }
             }

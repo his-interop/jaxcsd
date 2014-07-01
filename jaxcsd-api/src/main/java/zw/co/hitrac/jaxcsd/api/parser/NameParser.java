@@ -1,16 +1,19 @@
-package zw.co.hitrac.jaxcsd.api.xp;
+package zw.co.hitrac.jaxcsd.api.parser;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.Name;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
 /**
  *
- * @author charles
+ * @author Charles Chigoriwa
  */
-public class NameHandler {
+public class NameParser extends AbstractCsdParser<Name> {
 
-    public static void handle(Name name, XMLStreamReader r) throws XMLStreamException {
+    @Override
+    public void parse(Name name, CsdElement nameElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
         while (r.hasNext()) {
             r.next();
 
@@ -38,7 +41,7 @@ public class NameHandler {
                 }
 
             } else if (r.isEndElement()) {
-                if ("name".equals(r.getLocalName())) {
+                if (nameElement.elementEquals(r)) {
                     break;
                 }
             }

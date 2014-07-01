@@ -1,12 +1,10 @@
 package zw.co.hitrac.jaxcsd.api.query;
 
 import java.util.List;
-import zw.co.hitrac.jaxcsd.api.domain.CSD;
 import zw.co.hitrac.jaxcsd.api.domain.Facility;
 import zw.co.hitrac.jaxcsd.api.domain.OtherID;
 import zw.co.hitrac.jaxcsd.api.domain.Provider;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
-import zw.co.hitrac.jaxcsd.api.xp.CSDHandler;
 
 /**
  *
@@ -21,10 +19,10 @@ public class StoredQueryManager {
         String xmlResponseBody = JaxCsdUtil.executeXmlPost(xmlRequestBody, httpAddress);
         //System.out.print("response=" + xmlResponseBody);
         try {
-            CSD csd = CSDHandler.getCSD(xmlResponseBody);
+            /*CSD csd = CSDHandler.getCSD(xmlResponseBody);
             if(csd!=null && csd.getProviderDirectory()!=null){
                 return csd.getProviderDirectory().getProviders();
-            }
+            }*/
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
             throw new RuntimeException(ex);
@@ -41,10 +39,10 @@ public class StoredQueryManager {
         String xmlResponseBody = JaxCsdUtil.executeXmlPost(xmlRequestBody, httpAddress);
         //System.out.print("response=" + xmlResponseBody);
         try {
-            CSD csd = CSDHandler.getCSD(xmlResponseBody);
+            /*CSD csd = CSDHandler.getCSD(xmlResponseBody);
             if(csd!=null && csd.getProviderDirectory()!=null){
                 return csd.getFacilityDirectory().getFacilities();
-            }
+            }*/
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
         }

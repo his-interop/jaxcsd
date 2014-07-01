@@ -1,6 +1,7 @@
 package zw.co.hitrac.jaxcsd.api.parser;
 
-import zw.co.hitrac.jaxcsd.api.xp.*;
+import zw.co.hitrac.jaxcsd.api.parser.util.HandlerUtils;
+import zw.co.hitrac.jaxcsd.api.parser.ext.DefaultServiceExtensionParser;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;

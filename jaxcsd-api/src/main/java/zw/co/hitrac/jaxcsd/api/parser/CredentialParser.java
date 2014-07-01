@@ -1,20 +1,22 @@
-package zw.co.hitrac.jaxcsd.api.xp;
+package zw.co.hitrac.jaxcsd.api.parser;
 
-import java.text.ParseException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import zw.co.hitrac.jaxcsd.api.domain.Credential;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
+import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
 
 /**
  *
  * @author Charles Chigoriwa
  */
-public class CredentialHandler {
-
-    public static void handle(Credential credential, XMLStreamReader r) throws XMLStreamException, ParseException {
-        while (r.hasNext()) {
+public class CredentialParser extends AbstractCsdParser<Credential>{
+    
+    @Override
+    public void parse(final Credential credential, CsdElement credentialElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+         while (r.hasNext()) {
             r.next();
 
             if (r.isStartElement()) {
@@ -49,10 +51,14 @@ public class CredentialHandler {
                     }
                 }
             } else if (r.isEndElement()) {
-                if ("credential".equals(r.getLocalName())) {
+                if (credentialElement.elementEquals(r)) {
                     break;
                 }
             }
         }
     }
+
+   
+
+    
 }

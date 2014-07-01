@@ -43,19 +43,22 @@ public class JaxCsdUtil {
 
         return buffer.toString();
     }
-    
-    
+
     public static String toIsoShortDateFormatString(Date date) {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         StringBuilder buffer = new StringBuilder(format.format(date));
         return buffer.toString();
     }
-    
-    public static Date toDateFromIsoShortString(String string) throws ParseException {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        return format.parse(string);
+
+    public static Date toDateFromIsoShortString(String string) {
+        try {
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            return format.parse(string);
+        } catch (ParseException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     public static String inputStreamToString(InputStream inputStream) throws IOException {
@@ -93,7 +96,7 @@ public class JaxCsdUtil {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public static String executeGet(String httpAddress) {
         try {
             HttpClient httpclient = new DefaultHttpClient();
@@ -123,18 +126,18 @@ public class JaxCsdUtil {
         items.add(elementValue);
         return items;
     }
-    
-    public static List<CodedType> initItems(CodedType codedType){
-        List<CodedType> items=new ArrayList<CodedType>();
+
+    public static List<CodedType> initItems(CodedType codedType) {
+        List<CodedType> items = new ArrayList<CodedType>();
         items.add(codedType);
         return items;
     }
-    
-    public static boolean isEmptyString(String string){
-        return (string==null || string.trim().length()==0);
+
+    public static boolean isEmptyString(String string) {
+        return (string == null || string.trim().length() == 0);
     }
 
     public static void main(String[] args) throws ParseException {
-      System.out.println(toDateFromIsoShortString("2014-05-17"));
+        System.out.println(toDateFromIsoShortString("2014-05-17"));
     }
 }

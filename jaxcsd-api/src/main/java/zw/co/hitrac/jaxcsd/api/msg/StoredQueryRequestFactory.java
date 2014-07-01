@@ -3,7 +3,6 @@ package zw.co.hitrac.jaxcsd.api.msg;
 import zw.co.hitrac.jaxcsd.api.domain.CSD;
 import zw.co.hitrac.jaxcsd.api.domain.Provider;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
-import zw.co.hitrac.jaxcsd.api.xp.CSDHandler;
 
 /**
  *
@@ -45,13 +44,13 @@ public class StoredQueryRequestFactory {
         String responseXmlBody = executeStoredQuery(params, functionUuid, httpAddress);
         System.out.println(responseXmlBody);
         try {
-            CSD csd=CSDHandler.getCSD(responseXmlBody);
+            /*CSD csd=CSDHandler.getCSD(responseXmlBody);
             
             if(csd.getProviderDirectory()!=null && csd.getProviderDirectory().getProviders()!=null){
                 for(Provider provider:csd.getProviderDirectory().getProviders()){
                     System.out.println("======"+provider.getDemographic().getNames().get(0).getSurname());
                 }
-            }
+            }*/
         } catch (Exception ex) {
         }
     }

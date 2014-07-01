@@ -1,6 +1,8 @@
 package zw.co.hitrac.jaxcsd.api.parser.util;
 
 import zw.co.hitrac.jaxcsd.api.parser.FacilityExtensionParser;
+import zw.co.hitrac.jaxcsd.api.parser.FacilityOrganizationExtensionParser;
+import zw.co.hitrac.jaxcsd.api.parser.FacilityOrganizationParser;
 import zw.co.hitrac.jaxcsd.api.parser.OrganizationExtensionParser;
 import zw.co.hitrac.jaxcsd.api.parser.ProviderExtensionParser;
 import zw.co.hitrac.jaxcsd.api.parser.ServiceExtensionParser;
@@ -15,6 +17,7 @@ public class CsdParserExtensions {
     private OrganizationExtensionParser organizationExtensionParser;
     private FacilityExtensionParser facilityExtensionParser;
     private ServiceExtensionParser serviceExtensionParser;
+    private FacilityOrganizationExtensionParser facilityOrganizationExtensionParser;
 
     public ProviderExtensionParser getProviderExtensionParser() {
         return providerExtensionParser;
@@ -47,7 +50,16 @@ public class CsdParserExtensions {
     public void setServiceExtensionParser(ServiceExtensionParser serviceExtensionParser) {
         this.serviceExtensionParser = serviceExtensionParser;
     }
+
+    public FacilityOrganizationExtensionParser getFacilityOrganizationExtensionParser() {
+        return facilityOrganizationExtensionParser;
+    }
     
+    
+
+    public void setFacilityOrganizationExtensionParser(FacilityOrganizationExtensionParser facilityOrganizationExtensionParser) {
+        this.facilityOrganizationExtensionParser = facilityOrganizationExtensionParser;
+    }
     
     
 }

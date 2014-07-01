@@ -1,8 +1,9 @@
-package zw.co.hitrac.jaxcsd.api.parser;
+package zw.co.hitrac.jaxcsd.api.parser.ext;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import zw.co.hitrac.jaxcsd.api.domain.Provider;
+import zw.co.hitrac.jaxcsd.api.domain.Organization;
+import zw.co.hitrac.jaxcsd.api.parser.OrganizationExtensionParser;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdElement;
 import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
 
@@ -10,11 +11,11 @@ import zw.co.hitrac.jaxcsd.api.parser.util.CsdParserExtensions;
  *
  * @author Charles Chigoriwa
  */
-public class DefaultProviderExtensionParser extends ProviderExtensionParser{
+public class DefaultOrganizationExtensionParser extends OrganizationExtensionParser {
 
     @Override
-    public void parse(Provider provider,CsdElement extensionElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
-         while (r.hasNext()) {
+    public void parse(Organization organization,CsdElement extensionElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
+        while (r.hasNext()) {
             r.next();
             if (r.isEndElement()) {
                 if (extensionElement.elementEquals(r)) {
@@ -23,5 +24,4 @@ public class DefaultProviderExtensionParser extends ProviderExtensionParser{
             }
         }
     }
-    
 }

@@ -1,6 +1,5 @@
 package zw.co.hitrac.jaxcsd.api.parser;
 
-import zw.co.hitrac.jaxcsd.api.xp.*;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.domain.Provider;
@@ -15,7 +14,11 @@ import static zw.co.hitrac.jaxcsd.api.util.CsdElementConstants.*;
  */
 public class ProviderDirectoryParser extends AbstractCsdParser<ProviderDirectory>{
     
-    public static final CsdElement providerElement=new CsdElement(PROVIDER);
+    private ProviderParser providerParser=new ProviderParser();
+    
+    public static final CsdElement PROVIDER_ELEMENT=new CsdElement(PROVIDER);
+    
+    
             
 
     public void parse(ProviderDirectory providerDirectory,CsdElement providerDirectoryElement,  XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
@@ -23,11 +26,11 @@ public class ProviderDirectoryParser extends AbstractCsdParser<ProviderDirectory
             while (r.hasNext()) {
                 r.next();
                 if (r.isStartElement()) {
-                    if (providerElement.elementEquals(r)) {
+                    if (PROVIDER_ELEMENT.elementEquals(r)) {
                         Provider provider = new Provider();
                         provider.setOid(r.getAttributeValue("", "oid"));
                         providerDirectory.getProviders().add(provider);
-                        ProviderHandler.handle(provider, r);
+                        providerParser.parse(provider, PROVIDER_ELEMENT, r, csdParserExtensions);
                     }
 
 
@@ -39,4 +42,10 @@ public class ProviderDirectoryParser extends AbstractCsdParser<ProviderDirectory
             }
         }
     }
+
+    public void setProviderParser(ProviderParser providerParser) {
+        this.providerParser = providerParser;
+    }
+    
+    
 }
