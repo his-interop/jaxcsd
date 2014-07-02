@@ -43,7 +43,7 @@ public class RequestParamsMarshaler extends Marshaler<RequestParams> {
             if (requestParams.getCodedType() != null) {
                 Map<String, String> attributes = new LinkedHashMap<String, String>();
                 attributes.put("code", requestParams.getCodedType().getCode());
-                attributes.put("codingSchema", requestParams.getCodedType().getCodingSchema());
+                attributes.put("codingScheme", requestParams.getCodedType().getCodingScheme());
                 sb.append(getInlineXmlElement("codedType", attributes));
             }
 

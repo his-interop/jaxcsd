@@ -89,8 +89,8 @@ public abstract class AbstractOrganization extends CsdEntity {
         return this;
     }
 
-    public AbstractOrganization addLanguage(String code, String codingSchema, String value) {
-        this.languages.add(new CodedType(code, codingSchema, value));
+    public AbstractOrganization addLanguage(String code, String codingScheme, String value) {
+        this.languages.add(new CodedType(code, codingScheme, value));
         return this;
     }
 

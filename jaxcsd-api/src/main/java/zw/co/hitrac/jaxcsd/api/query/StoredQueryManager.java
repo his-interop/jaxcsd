@@ -3,7 +3,6 @@ package zw.co.hitrac.jaxcsd.api.query;
 import java.util.List;
 import zw.co.hitrac.jaxcsd.api.domain.CSD;
 import zw.co.hitrac.jaxcsd.api.domain.Facility;
-import zw.co.hitrac.jaxcsd.api.domain.OtherID;
 import zw.co.hitrac.jaxcsd.api.domain.Provider;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
 
@@ -52,8 +51,9 @@ public class StoredQueryManager {
         //equestParams.setCommonName("chigo");
         //requestParams.setStart(20000);
         //requestParams.setOtherID(new OtherID("08-563960B29", "mohaffairs.org.zw"));
+        requestParams.setCommonName("chig");
         requestParams.setMax(5);
-        List<Provider> providers = getProviders(requestParams, "http://192.168.1.23:8984/CSD/csr/ncz/careServicesRequest");
+        List<Provider> providers = getProviders(requestParams, "http://192.168.1.23:8984/CSD/csr/mohcc/careServicesRequest");
         if (providers != null && !providers.isEmpty()) {
             for (Provider provider : providers) {
                 System.out.println("Surname :" + provider.getTopName().getSurname());

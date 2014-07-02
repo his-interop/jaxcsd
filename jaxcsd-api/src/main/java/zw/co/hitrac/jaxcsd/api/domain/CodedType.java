@@ -10,20 +10,20 @@ import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
 public class CodedType implements CsdMarshalable {
 
     private String code;
-    private String codingSchema;
+    private String codingScheme;
     private String value = "";
     private Marshaler<CodedType> marshaler = CodedTypeMarshaler.get();
 
     public CodedType() {
     }
 
-    public CodedType(String code, String codingSchema) {
-        this(code, codingSchema, "");
+    public CodedType(String code, String codingScheme) {
+        this(code, codingScheme, "");
     }
 
-    public CodedType(String code, String codingSchema, String value) {
+    public CodedType(String code, String codingScheme, String value) {
         this.code = code;
-        this.codingSchema = codingSchema;
+        this.codingScheme = codingScheme;
         this.value = value;
     }
 
@@ -35,12 +35,12 @@ public class CodedType implements CsdMarshalable {
         this.code = code;
     }
 
-    public String getCodingSchema() {
-        return codingSchema;
+    public String getCodingScheme() {
+        return codingScheme;
     }
 
-    public void setCodingSchema(String codingSchema) {
-        this.codingSchema = codingSchema;
+    public void setCodingScheme(String codingScheme) {
+        this.codingScheme = codingScheme;
     }
 
     public String getValue() {

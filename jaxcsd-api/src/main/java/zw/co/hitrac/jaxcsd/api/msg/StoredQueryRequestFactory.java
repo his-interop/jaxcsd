@@ -34,7 +34,7 @@ public class StoredQueryRequestFactory {
          * Parameters
          */
         StringBuilder sb = new StringBuilder();
-        //sb.append(InlineXmlElementFactory.getInlineXmlElement("codedType",new AttributesWrapper("code","-1621032776").add("codingSchema", "1.3.6.1.4.1.21367.100.1")));
+        //sb.append(InlineXmlElementFactory.getInlineXmlElement("codedType",new AttributesWrapper("code","-1621032776").add("codingScheme", "1.3.6.1.4.1.21367.100.1")));
         String params = sb.toString();
         /*End of parameters*/
 

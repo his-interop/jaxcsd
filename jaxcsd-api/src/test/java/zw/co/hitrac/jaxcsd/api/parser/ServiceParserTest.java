@@ -35,7 +35,7 @@ public class ServiceParserTest extends TestCase {
         System.out.println("parse");
 
         String xml = "<myService oid=\"1.3.6.1.4.1.21367.200.99.111.101.101\">\n"
-                + "			<codedType code=\"101-001\" codingSchema=\"1.3.6.1.4.1.21367.100.1\"/>\n"
+                + "			<codedType code=\"101-001\" codingScheme=\"1.3.6.1.4.1.21367.100.1\"/>\n"
                 + "			<record created=\"2013-12-01T14:00:00+00:00\" updated=\"2013-12-01T14:00:00+00:00\" status=\"Active\" sourceDirectory=\"http://www.ihe.net\"/>\n"
                 + "</myService>";
 

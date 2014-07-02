@@ -23,7 +23,7 @@ public class CredentialParser extends AbstractCsdParser<Credential>{
                 if ("codedType".equals(r.getLocalName())) {
                     CodedType codedType = new CodedType();
                     codedType.setCode(r.getAttributeValue("", "code"));
-                    codedType.setCodingSchema(r.getAttributeValue("", "codingSchema"));
+                    codedType.setCodingScheme(r.getAttributeValue("", "codingScheme"));
                     r.next();
                     if (r.isCharacters()) {
                         codedType.setValue(r.getText());

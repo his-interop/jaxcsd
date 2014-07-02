@@ -19,7 +19,7 @@ public class CodedTypeMarshaler extends Marshaler<CodedType> {
     @Override
     public String marshal(CodedType codedType, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append(getInlineXmlElement(elementName, codedType.getValue(), new AttributesWrapper("code", codedType.getCode()).add("codingSchema", codedType.getCodingSchema())));
+        sb.append(getInlineXmlElement(elementName, codedType.getValue(), new AttributesWrapper("code", codedType.getCode()).add("codingScheme", codedType.getCodingScheme())));
         return sb.toString();
     }
 

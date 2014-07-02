@@ -21,7 +21,7 @@ public class CodedTypeMarshalerTest extends TestCase {
         CodedType codedType = new CodedType("myCode", "myCodingSchema");
         String elementName = "language";
         CodedTypeMarshaler instance = new CodedTypeMarshaler();
-        String expResult = "<language code=\"myCode\" codingSchema=\"myCodingSchema\"></language>";
+        String expResult = "<language code=\"myCode\" codingScheme=\"myCodingSchema\"></language>";
         String result = instance.marshal(codedType, elementName);
         assertEquals(expResult, result);
     }
@@ -33,7 +33,7 @@ public class CodedTypeMarshalerTest extends TestCase {
         System.out.println("marshal");
         CodedType codedType =new CodedType("0400", "12.1.2.9.56", "Student Nurse");
         CodedTypeMarshaler instance = new CodedTypeMarshaler();
-        String expResult = "<codedType code=\"0400\" codingSchema=\"12.1.2.9.56\">Student Nurse</codedType>";
+        String expResult = "<codedType code=\"0400\" codingScheme=\"12.1.2.9.56\">Student Nurse</codedType>";
         String result = instance.marshal(codedType);
         assertEquals(expResult, result);
     }

@@ -29,7 +29,7 @@ public class HandlerUtils {
     public static CodedType getCodedType(XMLStreamReader r) throws XMLStreamException {
         CodedType codedType = new CodedType();
         codedType.setCode(r.getAttributeValue("", "code"));
-        codedType.setCodingSchema(r.getAttributeValue("", "codingSchema"));
+        codedType.setCodingScheme(r.getAttributeValue("", "codingScheme"));
         codedType.setValue(getCharacters(r));
         return codedType;
     }

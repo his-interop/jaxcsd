@@ -99,8 +99,8 @@ public class Provider extends CsdEntity {
         return this;
     }
 
-    public Provider addLanguage(String code, String codingSchema, String value) {
-        this.languages.add(new CodedType(code, codingSchema, value));
+    public Provider addLanguage(String code, String codingScheme, String value) {
+        this.languages.add(new CodedType(code, codingScheme, value));
         return this;
     }
 
@@ -125,8 +125,8 @@ public class Provider extends CsdEntity {
         return this;
     }
 
-    public Provider addSpecialty(String code, String codingSchema, String value) {
-        this.specialties.add(new CodedType(code, codingSchema, value));
+    public Provider addSpecialty(String code, String codingScheme, String value) {
+        this.specialties.add(new CodedType(code, codingScheme, value));
         return this;
     }
 

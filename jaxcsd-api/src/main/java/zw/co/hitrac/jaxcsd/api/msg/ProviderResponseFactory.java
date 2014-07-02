@@ -47,7 +47,7 @@ public class ProviderResponseFactory {
         List<CodedType> codedTypes = provider.getCodedTypes();
         if (codedTypes != null && !codedTypes.isEmpty()) {
             for (CodedType codedType : codedTypes) {
-                sb.append(getInlineXmlElement("codedType", codedType.getValue(), new AttributesWrapper("code", codedType.getCode()).add("codingSchema", codedType.getCodingSchema())));
+                sb.append(getInlineXmlElement("codedType", codedType.getValue(), new AttributesWrapper("code", codedType.getCode()).add("codingScheme", codedType.getCodingScheme())));
             }
         }
         return sb.toString();
@@ -101,7 +101,7 @@ public class ProviderResponseFactory {
         List<CodedType> codedTypes = new ArrayList<CodedType>();
         CodedType codedType = new CodedType();
         codedType.setCode("105-007");
-        codedType.setCodingSchema("1.3.6.1.4.1.21367.100.1");
+        codedType.setCodingScheme("1.3.6.1.4.1.21367.100.1");
         codedType.setValue("Physician/Medical Oncology");
         codedTypes.add(codedType);
         provider.setCodedTypes(codedTypes);

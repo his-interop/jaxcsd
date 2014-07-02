@@ -59,7 +59,7 @@ public class InlineXmlElementFactory {
         String elementValue = "Physician/Medical Oncology";
         Map<String, String> attributes = new LinkedHashMap<String, String>();
         attributes.put("code", "105-007");
-        attributes.put("codingSchema", "1.3.6.1.4.1.21367.100.1");
+        attributes.put("codingScheme", "1.3.6.1.4.1.21367.100.1");
         System.out.println(getInlineXmlElement(elementName, attributes));
     }
 }
