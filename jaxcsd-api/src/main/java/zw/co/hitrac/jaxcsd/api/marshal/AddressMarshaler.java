@@ -21,7 +21,7 @@ public class AddressMarshaler extends Marshaler<Address> {
             if (address.getType() != null) {
                 sb.append("<").append(elementName).append(" type=\"").append(address.getType()).append("\">");
             } else {
-                sb.append("<").append(elementName).append("\">");
+                sb.append("<").append(elementName).append(">");
             }
             for (Address.AddressLine addressLine : address.getAddressLines()) {
                 sb.append(addressLine.marshal());
