@@ -21,7 +21,7 @@ public class ProviderFacilitiesMarshaler extends Marshaler<ProviderFacilities> {
         if (providerFacilities != null && providerFacilities.getProviderFacilities() != null && !providerFacilities.getProviderFacilities().isEmpty()) {
             sb.append("<").append(elementName).append(">");
             for (ProviderFacility providerFacility : providerFacilities.getProviderFacilities()) {
-                providerFacility.marshal();
+                sb.append(providerFacility.marshal());
             }
             sb.append("</").append(elementName).append(">");
         }

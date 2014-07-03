@@ -21,7 +21,7 @@ public class ProviderOrganizationsMarshaler extends Marshaler<ProviderOrganizati
         if (providerOrganizations != null && providerOrganizations.getProviderOrganizations() != null && !providerOrganizations.getProviderOrganizations().isEmpty()) {
             sb.append("<").append(elementName).append(">");
             for (ProviderOrganization providerOrganization : providerOrganizations.getProviderOrganizations()) {
-                providerOrganization.marshal();
+                sb.append(providerOrganization.marshal());
             }
             sb.append("</").append(elementName).append(">");
         }
