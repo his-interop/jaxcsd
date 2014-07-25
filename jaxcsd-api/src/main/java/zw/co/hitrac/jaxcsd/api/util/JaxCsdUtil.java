@@ -92,14 +92,10 @@ public class JaxCsdUtil {
             httpPost.setHeader("Content-Type", "text/xml;charset=UTF-8");
             HttpResponse response = httpclient.execute(httpPost);
             int statusCode=response.getStatusLine().getStatusCode();
-            Header[] messages=response.getHeaders("message");
-            String message=null;
-            if(messages!=null && messages.length>0){
-                message=messages[0].getValue();
-            }
+            String reasonPhrase=response.getStatusLine().getReasonPhrase();
             String strResponseMessage = JaxCsdUtil.parseHttpEntity(new BufferedHttpEntity(response.getEntity()));
             httpclient.getConnectionManager().shutdown();
-            return new JaxcsdResponse(statusCode, message, strResponseMessage);
+            return new JaxcsdResponse(statusCode,reasonPhrase, strResponseMessage);
         } catch (Exception ex) {
             throw new JaxcsdRuntimeException(ex);
         }

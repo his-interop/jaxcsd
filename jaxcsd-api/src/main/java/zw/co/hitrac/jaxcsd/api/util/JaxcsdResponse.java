@@ -9,18 +9,17 @@ import java.io.Serializable;
 public class JaxcsdResponse implements Serializable{
     
     private int statusCode;
-    private String message;
+    private String reasonPhrase;
     private String body;
 
     public JaxcsdResponse() {
     }
 
-    public JaxcsdResponse(int statusCode, String message, String body) {
+    public JaxcsdResponse(int statusCode, String reasonPhrase, String body) {
         this.statusCode = statusCode;
-        this.message = message;
+        this.reasonPhrase = reasonPhrase;
         this.body = body;
     }
-    
     
 
     public int getStatusCode() {
@@ -31,13 +30,14 @@ public class JaxcsdResponse implements Serializable{
         this.statusCode = statusCode;
     }
 
-    public String getMessage() {
-        return message;
+    public String getReasonPhrase() {
+        return reasonPhrase;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setReasonPhrase(String reasonPhrase) {
+        this.reasonPhrase = reasonPhrase;
     }
+    
 
     public String getBody() {
         return body;
@@ -49,10 +49,6 @@ public class JaxcsdResponse implements Serializable{
 
     @Override
     public String toString() {
-        return "JaxcsdResponse{" + "statusCode=" + statusCode + ", message=" + message + ", body=" + body + '}';
+        return "JaxcsdResponse{" + "statusCode=" + statusCode + ", reasonPhrase=" + reasonPhrase + '}';
     }
-    
-    
-    
-    
 }
