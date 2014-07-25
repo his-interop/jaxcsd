@@ -1,10 +1,12 @@
 package zw.co.hitrac.jaxcsd.api.query;
 
 import java.util.List;
+import zw.co.hitrac.jaxcsd.api.JaxcsdRuntimeException;
 import zw.co.hitrac.jaxcsd.api.domain.CSD;
 import zw.co.hitrac.jaxcsd.api.domain.Facility;
 import zw.co.hitrac.jaxcsd.api.domain.Provider;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
+import zw.co.hitrac.jaxcsd.api.util.JaxcsdResponse;
 
 /**
  *
@@ -15,7 +17,7 @@ public class StoredQueryManager {
     public static List<Provider> getProviders(RequestParams requestParams, String httpAddress) {
         CsdQueryClient csdQueryClient = new CsdQueryClient();
         try {
-            CSD csd=csdQueryClient.callStandardStoredFunction(requestParams, StoredQueryConstants.PROVIDER_SEARCH, httpAddress, null);
+            CSD csd = csdQueryClient.callStandardStoredFunction(requestParams, StoredQueryConstants.PROVIDER_SEARCH, httpAddress, null);
             return csd.getProviderDirectory().getProviders();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
@@ -25,9 +27,9 @@ public class StoredQueryManager {
     }
 
     public static List<Facility> getFacilities(RequestParams requestParams, String httpAddress) {
-         CsdQueryClient csdQueryClient = new CsdQueryClient();
+        CsdQueryClient csdQueryClient = new CsdQueryClient();
         try {
-            CSD csd=csdQueryClient.callStandardStoredFunction(requestParams, StoredQueryConstants.FACILITY_SEARCH, httpAddress, null);
+            CSD csd = csdQueryClient.callStandardStoredFunction(requestParams, StoredQueryConstants.FACILITY_SEARCH, httpAddress, null);
             return csd.getFacilityDirectory().getFacilities();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
@@ -40,7 +42,11 @@ public class StoredQueryManager {
     public static String pushCSD(RequestParams requestParams, String httpAddress) {
         CareServicesRequest careServicesRequest = new CareServicesRequest(new Function(StoredQueryConstants.PUSH_REQUEST, requestParams));
         String xmlRequestBody = careServicesRequest.marshal();
-        String xmlResponseBody = JaxCsdUtil.executeXmlPost(xmlRequestBody, httpAddress);
+        JaxcsdResponse jaxcsdResponse = JaxCsdUtil.executeXmlPost(xmlRequestBody, httpAddress);
+        if (jaxcsdResponse.getStatusCode() != 200) {
+            throw new JaxcsdRuntimeException(jaxcsdResponse.toString());
+        }
+        String xmlResponseBody = jaxcsdResponse.getBody();
         return xmlResponseBody;
 
     }

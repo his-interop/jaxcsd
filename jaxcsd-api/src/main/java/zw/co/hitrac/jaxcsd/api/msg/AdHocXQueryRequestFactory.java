@@ -1,6 +1,8 @@
 package zw.co.hitrac.jaxcsd.api.msg;
 
+import zw.co.hitrac.jaxcsd.api.JaxcsdRuntimeException;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
+import zw.co.hitrac.jaxcsd.api.util.JaxcsdResponse;
 
 /**
  *
@@ -21,12 +23,14 @@ public class AdHocXQueryRequestFactory {
         return sb.toString();
     }
 
-    public static String executeAdHocQuery(String adHocQuery, String httpAddress) {           
-            String xmlBody = getAdHocCareServicesRequest(adHocQuery);
-            return JaxCsdUtil.executeXmlPost(xmlBody, httpAddress);
+    public static String executeAdHocQuery(String adHocQuery, String httpAddress) {
+        String xmlBody = getAdHocCareServicesRequest(adHocQuery);
+        JaxcsdResponse jaxcsdResponse = JaxCsdUtil.executeXmlPost(xmlBody, httpAddress);
+        if (jaxcsdResponse.getStatusCode() != 200) {
+            throw new JaxcsdRuntimeException(jaxcsdResponse.toString());
+        }
+        return jaxcsdResponse.getBody();
     }
-
-   
 
     public static void main(String[] args) {
         String httpAddress = "http://localhost:8984/CSD/csr/mohcc/careServicesRequest";

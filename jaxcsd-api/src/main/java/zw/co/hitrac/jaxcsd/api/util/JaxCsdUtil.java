@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -17,6 +18,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import zw.co.hitrac.jaxcsd.api.JaxcsdRuntimeException;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import static zw.co.hitrac.jaxcsd.api.msg.InlineXmlElementFactory.getInlineXmlElement;
 
@@ -81,7 +83,7 @@ public class JaxCsdUtil {
         return sw.toString();
     }
 
-    public static String executeXmlPost(String httpBody, String httpAddress) {
+    public static JaxcsdResponse executeXmlPost(String httpBody, String httpAddress) {
         try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(httpAddress);
@@ -89,11 +91,17 @@ public class JaxCsdUtil {
             httpPost.setEntity(httpEntity);
             httpPost.setHeader("Content-Type", "text/xml;charset=UTF-8");
             HttpResponse response = httpclient.execute(httpPost);
+            int statusCode=response.getStatusLine().getStatusCode();
+            Header[] messages=response.getHeaders("message");
+            String message=null;
+            if(messages!=null && messages.length>0){
+                message=messages[0].getValue();
+            }
             String strResponseMessage = JaxCsdUtil.parseHttpEntity(new BufferedHttpEntity(response.getEntity()));
             httpclient.getConnectionManager().shutdown();
-            return strResponseMessage;
+            return new JaxcsdResponse(statusCode, message, strResponseMessage);
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new JaxcsdRuntimeException(ex);
         }
     }
 

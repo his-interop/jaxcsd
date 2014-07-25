@@ -1,8 +1,8 @@
 package zw.co.hitrac.jaxcsd.api.msg;
 
-import zw.co.hitrac.jaxcsd.api.domain.CSD;
-import zw.co.hitrac.jaxcsd.api.domain.Provider;
+import zw.co.hitrac.jaxcsd.api.JaxcsdRuntimeException;
 import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
+import zw.co.hitrac.jaxcsd.api.util.JaxcsdResponse;
 
 /**
  *
@@ -26,7 +26,11 @@ public class StoredQueryRequestFactory {
 
     public static String executeStoredQuery(String params, String functionUuid, String httpAddress) {
         String xmlBody = getStoredQueryRequest(params, functionUuid);
-        return JaxCsdUtil.executeXmlPost(xmlBody, httpAddress);
+        JaxcsdResponse jaxcsdResponse= JaxCsdUtil.executeXmlPost(xmlBody, httpAddress);
+        if (jaxcsdResponse.getStatusCode() != 200) {
+            throw new JaxcsdRuntimeException(jaxcsdResponse.toString());
+        }
+        return jaxcsdResponse.getBody();
     }
 
     public static void main(String[] args) {

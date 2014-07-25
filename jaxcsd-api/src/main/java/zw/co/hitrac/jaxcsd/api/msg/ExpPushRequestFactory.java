@@ -21,7 +21,7 @@ public class ExpPushRequestFactory {
      public static String executePushService(String directoryBagXml, String httpAddress) {
         try {           
             String xmlBody = getPushRequest(directoryBagXml);
-         return JaxCsdUtil.executeXmlPost(xmlBody, httpAddress);
+         return JaxCsdUtil.executeXmlPost(xmlBody, httpAddress).getBody();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
