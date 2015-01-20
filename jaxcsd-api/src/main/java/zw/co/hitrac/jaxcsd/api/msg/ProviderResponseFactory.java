@@ -2,15 +2,12 @@ package zw.co.hitrac.jaxcsd.api.msg;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import zw.co.hitrac.jaxcsd.api.domain.CodedType;
 import zw.co.hitrac.jaxcsd.api.domain.Provider;
 import static zw.co.hitrac.jaxcsd.api.msg.InlineXmlElementFactory.getInlineXmlElement;
-import zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil;
-import static zw.co.hitrac.jaxcsd.api.util.JaxCsdUtil.toXml;
 
 /**
  *
@@ -34,7 +31,7 @@ public class ProviderResponseFactory {
 
     private static String getProviderXml(Provider provider) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<provider oid=\"").append(provider.getOid()).append("\">");
+        sb.append("<provider entityID=\"").append(provider.getEntityID()).append("\">");
         sb.append(getCodedTypeXml(provider));
         sb.append(getDemographicXml(provider));
         sb.append(getRecordXml(provider));
@@ -97,7 +94,7 @@ public class ProviderResponseFactory {
 
     public static void main(String[] args) {
         Provider provider = new Provider();
-        provider.setOid("1.3.6.1.4.1.21367.200.99.1111");
+        provider.setEntityID("urn:oid:1.3.6.1.4.1.21367.200.99.1111");
         List<CodedType> codedTypes = new ArrayList<CodedType>();
         CodedType codedType = new CodedType();
         codedType.setCode("105-007");

@@ -19,7 +19,7 @@ public class ProviderFacilityMarshaler extends Marshaler<ProviderFacility> {
     @Override
     public String marshal(ProviderFacility providerFacility, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<").append(elementName).append(" oid=\"").append(providerFacility.getOid()).append("\">");
+        sb.append("<").append(elementName).append(" entityID=\"").append(providerFacility.getEntityID()).append("\">");
         //TODO: to add ProviderFacilityServiceListMarshaller here!
         //TODO: to add OperatingHoursListMarshaller here!
         sb.append(ExtensionListMarshaller.get().marshal(providerFacility.getExtensions()));

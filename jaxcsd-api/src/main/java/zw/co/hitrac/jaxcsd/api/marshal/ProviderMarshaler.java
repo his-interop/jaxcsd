@@ -28,7 +28,7 @@ public class ProviderMarshaler extends Marshaler<Provider> {
     @Override
     public String marshal(Provider provider, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<").append(elementName).append(" oid=\"").append(provider.getOid()).append("\">");
+        sb.append("<").append(elementName).append(" entityID=\"").append(provider.getEntityID()).append("\">");
         sb.append(OtherIDListMarshaler.get().marshal(provider.getOtherIDs()));
         sb.append(CodedTypeListMarshaler.get().marshal(provider.getCodedTypes(), "codedType"));
         sb.append(PersonMarshaler.get().marshal(provider.getDemographic()));
@@ -54,7 +54,7 @@ public class ProviderMarshaler extends Marshaler<Provider> {
 
     public static void main(String[] args) throws ParseException {
         Provider provider = new Provider();
-        provider.setOid("1.3.6.1.4.1.21367.200.99.1111");
+        provider.setEntityID("1.3.6.1.4.1.21367.200.99.1111");
         provider.addCodedType("105-007", "1.3.6.1.4.1.21367.100.1", "Physician/Medical Oncology");
         Person demographic = new Person();
         demographic.addName(new Name("Dr.", "Banerjee", "Dev").addCommonName("Banargee, Dev"));

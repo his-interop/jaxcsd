@@ -24,7 +24,7 @@ public class FacilityOrganizationsParser extends AbstractCsdParser<FacilityOrgan
             if (r.isStartElement()) {
                 if (ORGANIZATION_ELEMENT.elementEquals(r)) {
                     FacilityOrganization organization = new FacilityOrganization();
-                    organization.setOid(r.getAttributeValue("", "oid"));
+                    organization.setEntityID(r.getAttributeValue("", "entityID"));
                     facilityOrganizations.getFacilityOrganizations().add(organization);
                     facilityOrganizationParser.parse(organization,ORGANIZATION_ELEMENT, r, csdParserExtensions);
                 }

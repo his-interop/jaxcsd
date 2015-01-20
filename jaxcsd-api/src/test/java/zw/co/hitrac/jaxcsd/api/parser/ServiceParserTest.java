@@ -34,7 +34,7 @@ public class ServiceParserTest extends TestCase {
     public void testParse() throws Exception {
         System.out.println("parse");
 
-        String xml = "<myService oid=\"1.3.6.1.4.1.21367.200.99.111.101.101\">\n"
+        String xml = "<myService entityID=\"urn:oid:1.3.6.1.4.1.21367.200.99.111.101.101\">\n"
                 + "			<codedType code=\"101-001\" codingScheme=\"1.3.6.1.4.1.21367.100.1\"/>\n"
                 + "			<record created=\"2013-12-01T14:00:00+00:00\" updated=\"2013-12-01T14:00:00+00:00\" status=\"Active\" sourceDirectory=\"http://www.ihe.net\"/>\n"
                 + "</myService>";
@@ -43,7 +43,7 @@ public class ServiceParserTest extends TestCase {
         XMLStreamReader r = f.createXMLStreamReader(new ByteArrayInputStream(xml.getBytes()));
         r.next();
         Service service = new Service();
-        service.setOid(r.getAttributeValue("", "oid"));
+        service.setEntityID(r.getAttributeValue("", "entityID"));
         CsdElement servicelement = new CsdElement("myService");
         CsdParserExtensions csdParserExtensions = null;
         ServiceParser serviceParser = new ServiceParser();

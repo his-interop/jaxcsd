@@ -6,24 +6,24 @@ package zw.co.hitrac.jaxcsd.api.domain;
  */
 public abstract class UniqueID implements CsdMarshalable{
     
-    protected String oid;
+    protected String entityID;
 
     public UniqueID() {
     }
 
-    public UniqueID(String oid) {
-        this.oid = oid;
+    public UniqueID(String entityID) {
+        this.entityID = entityID;
     }
     
-    
-
-    public String getOid() {
-        return oid;
+    public String getEntityID() {
+        return entityID;
     }
 
-    public void setOid(String oid) {
-        this.oid = oid;
+    public void setEntityID(String entityID) {
+        this.entityID = entityID;
     }
+
+   
     
     
 }

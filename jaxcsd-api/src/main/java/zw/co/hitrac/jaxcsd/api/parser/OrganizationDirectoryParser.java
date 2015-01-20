@@ -24,7 +24,7 @@ public class OrganizationDirectoryParser extends AbstractCsdParser<OrganizationD
             if (r.isStartElement()) {
                 if (organizationElement.elementEquals(r)) {
                     Organization organization = new Organization();
-                    organization.setOid(r.getAttributeValue("", "oid"));
+                    organization.setEntityID(r.getAttributeValue("", "entityID"));
                     organizationDirectory.getOrganizations().add(organization);
                     organizationParser.parse(organization,organizationElement,r, csdParserExtensions);
                 }

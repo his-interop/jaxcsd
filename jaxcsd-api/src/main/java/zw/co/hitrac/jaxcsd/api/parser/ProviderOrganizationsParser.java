@@ -24,7 +24,7 @@ public class ProviderOrganizationsParser extends AbstractCsdParser<ProviderOrgan
             if(r.isStartElement()){
                 if (ORGANIZATION_ELEMENT.elementEquals(r)) {
                     ProviderOrganization providerOrganization=new ProviderOrganization();
-                    providerOrganization.setOid(r.getAttributeValue("", "oid"));
+                    providerOrganization.setEntityID(r.getAttributeValue("", "entityID"));
                     providerOrganizations.addProviderOrganization(providerOrganization);
                     providerOrganizationParser.parse(providerOrganization, ORGANIZATION_ELEMENT, r, csdParserExtensions);
                 }

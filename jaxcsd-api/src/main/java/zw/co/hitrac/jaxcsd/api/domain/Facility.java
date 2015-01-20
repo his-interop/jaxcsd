@@ -19,8 +19,8 @@ public class Facility extends AbstractOrganization {
     public Facility() {
     }
 
-    public Facility(String oid) {
-        this.oid = oid;
+    public Facility(String entityID) {
+        this.entityID=entityID;
     }
 
     public FacilityOrganizations getFacilityOrganizations() {

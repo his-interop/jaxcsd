@@ -14,7 +14,7 @@ import zw.co.hitrac.jaxcsd.api.util.CsdElementConstants;
  */
 public class ServiceDirectoryParser extends AbstractCsdParser<ServiceDirectory> {
     
-    private ServiceParser serviceParser = new ServiceParser();    
+    private final ServiceParser serviceParser = new ServiceParser();    
     public static final CsdElement serviceElement = new CsdElement(CsdElementConstants.SERVICE);
     
     public void parse(ServiceDirectory serviceDirectory, CsdElement serviceDirectoryElement, XMLStreamReader r, CsdParserExtensions csdParserExtensions) throws XMLStreamException {
@@ -23,7 +23,7 @@ public class ServiceDirectoryParser extends AbstractCsdParser<ServiceDirectory> 
             if (r.isStartElement()) {
                 if (serviceElement.localElementEquals(r)) {
                     Service service = new Service();
-                    service.setOid(r.getAttributeValue("", "oid"));
+                    service.setEntityID(r.getAttributeValue("", "entityID"));
                     serviceDirectory.getServices().add(service);
                     serviceParser.parse(service, serviceElement, r, csdParserExtensions);
                 }

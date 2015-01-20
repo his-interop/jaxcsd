@@ -23,7 +23,7 @@ public class ProviderFacilitiesParser extends AbstractCsdParser<ProviderFaciliti
             if(r.isStartElement()){
                 if (FACILITY_ELEMENT.elementEquals(r)) {
                     ProviderFacility providerFacility=new ProviderFacility();
-                    providerFacility.setOid(r.getAttributeValue("", "oid"));
+                    providerFacility.setEntityID(r.getAttributeValue("", "entityID"));
                     providerFacilities.addProviderFacility(providerFacility);
                     providerFacilityParser.parse(providerFacility,FACILITY_ELEMENT, r, csdParserExtensions);
                 }

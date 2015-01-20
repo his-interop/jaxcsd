@@ -28,7 +28,7 @@ public class ProviderDirectoryParser extends AbstractCsdParser<ProviderDirectory
                 if (r.isStartElement()) {
                     if (PROVIDER_ELEMENT.elementEquals(r)) {
                         Provider provider = new Provider();
-                        provider.setOid(r.getAttributeValue("", "oid"));
+                        provider.setEntityID(r.getAttributeValue("", "entityID"));
                         providerDirectory.getProviders().add(provider);
                         providerParser.parse(provider, PROVIDER_ELEMENT, r, csdParserExtensions);
                     }

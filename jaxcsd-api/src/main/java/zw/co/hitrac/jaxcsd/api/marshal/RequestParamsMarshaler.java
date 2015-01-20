@@ -32,8 +32,8 @@ public class RequestParamsMarshaler extends Marshaler<RequestParams> {
         StringBuilder sb = new StringBuilder();
         sb.append("<").append(elementName).append(">");
         if (requestParams != null) {
-            if (requestParams.getUniqueID() != null && requestParams.getUniqueID().getOid() != null) {
-                sb.append(getInlineXmlElement("id", new AttributesWrapper("oid", requestParams.getUniqueID().getOid())));
+            if (requestParams.getUniqueID() != null && requestParams.getUniqueID().getEntityID() != null) {
+                sb.append(getInlineXmlElement("id", new AttributesWrapper("entityID", requestParams.getUniqueID().getEntityID())));
             }
 
             if (requestParams.getCommonName() != null) {

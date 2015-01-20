@@ -23,8 +23,8 @@ public class Provider extends CsdEntity {
     public Provider() {
     }
 
-    public Provider(String oid) {
-        this.oid = oid;
+    public Provider(String entityID) {
+        this.entityID=entityID;
     }
 
     public Person getDemographic() {

@@ -19,7 +19,7 @@ public class UniqueIDMarshaler extends Marshaler<UniqueID> {
     public String marshal(UniqueID uniqueId, String elementName) {
         StringBuilder sb = new StringBuilder();
         if (uniqueId != null) {
-            sb.append(getInlineXmlElement(elementName, new AttributesWrapper("oid", uniqueId.getOid())));
+            sb.append(getInlineXmlElement(elementName, new AttributesWrapper("entityID", uniqueId.getEntityID())));
         }
         return sb.toString();
     }

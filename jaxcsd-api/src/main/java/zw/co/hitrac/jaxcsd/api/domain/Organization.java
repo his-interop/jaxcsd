@@ -19,8 +19,8 @@ public class Organization extends AbstractOrganization {
     public Organization() {
     }
 
-    public Organization(String oid) {
-        this.oid = oid;
+    public Organization(String entityID) {
+        this.entityID=entityID;
     }
 
     public List<Credential> getCredentials() {

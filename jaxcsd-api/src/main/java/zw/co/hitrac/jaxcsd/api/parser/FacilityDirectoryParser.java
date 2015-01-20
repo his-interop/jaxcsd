@@ -22,7 +22,7 @@ public class FacilityDirectoryParser extends AbstractCsdParser<FacilityDirectory
             if (r.isStartElement()) {
                 if (facilityElement.elementEquals(r)) {
                     Facility facility = new Facility();
-                    facility.setOid(r.getAttributeValue("", "oid"));
+                    facility.setEntityID(r.getAttributeValue("", "entityID"));
                     facilityDirectory.getFacilities().add(facility);
                     facilityParser.parse(facility, facilityElement, r, csdParserExtensions);
                 }

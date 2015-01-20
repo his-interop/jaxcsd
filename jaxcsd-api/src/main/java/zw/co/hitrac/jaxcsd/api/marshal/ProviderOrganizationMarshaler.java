@@ -19,7 +19,7 @@ public class ProviderOrganizationMarshaler extends Marshaler<ProviderOrganizatio
     @Override
     public String marshal(ProviderOrganization providerOrganization, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<").append(elementName).append(" oid=\"").append(providerOrganization.getOid()).append("\">");
+        sb.append("<").append(elementName).append(" entityID=\"").append(providerOrganization.getEntityID()).append("\">");
         sb.append(ExtensionListMarshaller.get().marshal(providerOrganization.getExtensions()));
         //TODO:: To verify and AddressListMarshaller as well as ContactPointListMarshaller where agreed!
         sb.append("</").append(elementName).append(">");

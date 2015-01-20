@@ -24,7 +24,7 @@ public class FacilityMarshaler extends Marshaler<Facility> {
     @Override
     public String marshal(Facility facility, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<").append(elementName).append(" oid=\"").append(facility.getOid()).append("\">");
+        sb.append("<").append(elementName).append(" entityID=\"").append(facility.getEntityID()).append("\">");
         sb.append(OtherIDListMarshaler.get().marshal(facility.getOtherIDs()));
         sb.append(CodedTypeListMarshaler.get().marshal(facility.getCodedTypes(), "codedType"));
         sb.append(getInlineXmlElement("primaryName", facility.getPrimaryName()));
@@ -53,7 +53,7 @@ public class FacilityMarshaler extends Marshaler<Facility> {
 
     public static void main(String[] args) {
         Facility facility = new Facility();
-        facility.setOid("1.3.6.1.4.1.21367.200.99.11");
+        facility.setEntityID("urn:oid:1.3.6.1.4.1.21367.200.99.11");
         facility.addCodedType("103-110", "1.3.6.1.4.1.21367.100.1", "Radiology - Imaging Services");
         facility.setPrimaryName("Connectathon Radiology Facility");
         facility.addAddress(new Address("Billing")

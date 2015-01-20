@@ -23,7 +23,7 @@ public class OrganizationMarshaler extends Marshaler<Organization> {
     @Override
     public String marshal(Organization organization, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<").append(elementName).append(" oid=\"").append(organization.getOid()).append("\">");
+        sb.append("<").append(elementName).append(" entityID=\"").append(organization.getEntityID()).append("\">");
         sb.append(OtherIDListMarshaler.get().marshal(organization.getOtherIDs()));
         sb.append(CodedTypeListMarshaler.get().marshal(organization.getCodedTypes(), "codedType"));
         sb.append(getInlineXmlElement("primaryName", organization.getPrimaryName()));
@@ -51,7 +51,7 @@ public class OrganizationMarshaler extends Marshaler<Organization> {
 
     public static void main(String[] args) {
         Organization organization = new Organization();
-        organization.setOid("1.3.6.1.4.1.21367.200.99.1");
+        organization.setEntityID("urn:oid:1.3.6.1.4.1.21367.200.99.1");
         organization.addCodedType("101-002", "1.3.6.1.4.1.21367.100.1", "Integrated Delivery Network");
         organization.setPrimaryName("Connectathon CSD IDN One");
         organization.addAddress(new Address("Billing")

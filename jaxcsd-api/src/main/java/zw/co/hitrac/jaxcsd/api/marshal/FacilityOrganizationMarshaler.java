@@ -19,7 +19,7 @@ public class FacilityOrganizationMarshaler extends Marshaler<FacilityOrganizatio
     @Override
     public String marshal(FacilityOrganization facilityOrganization, String elementName) {
         StringBuilder sb=new StringBuilder();
-        sb.append("<").append(elementName).append(" oid=\"").append(facilityOrganization.getOid()).append("\">");
+        sb.append("<").append(elementName).append(" entityID=\"").append(facilityOrganization.getEntityID()).append("\">");
         //TODO:: work on FacilityOrganizationServiceListMarshaller here !!!       
         sb.append(ExtensionListMarshaller.get().marshal(facilityOrganization.getExtensions()));
         sb.append("</").append(elementName).append(">");
