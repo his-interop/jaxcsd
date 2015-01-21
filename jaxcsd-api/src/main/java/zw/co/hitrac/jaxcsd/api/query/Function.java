@@ -9,7 +9,7 @@ import zw.co.hitrac.jaxcsd.api.marshal.FunctionMarshaler;
  */
 public class Function implements CsdMarshalable{
     
-    private String uuid;
+    private String urn;
     private boolean encapsulated;
     
     private RequestParams requestParams;
@@ -17,24 +17,23 @@ public class Function implements CsdMarshalable{
     public Function() {
     }
 
-    public Function(String uuid) {
-        this.uuid = uuid;
+    public Function(String urn) {
+        this.urn = urn;
     }
 
-    public Function(String uuid, RequestParams requestParams) {
-        this.uuid = uuid;
+    public Function(String urn, RequestParams requestParams) {
+        this.urn = urn;
         this.requestParams = requestParams;
     }
-    
-    
 
-    public String getUuid() {
-        return uuid;
+    public String getUrn() {
+        return urn;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setUrn(String urn) {
+        this.urn = urn;
     }
+
 
     public RequestParams getRequestParams() {
         return requestParams;

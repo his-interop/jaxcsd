@@ -17,7 +17,7 @@ public class FunctionMarshaler extends Marshaler<Function> {
     @Override
     public String marshal(Function function, String elementName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<").append(elementName).append(" uuid=\"").append(function.getUuid()).append("\">");
+        sb.append("<").append(elementName).append(" urn=\"").append(function.getUrn()).append("\">");
         sb.append(function.getRequestParams().marshal());
         sb.append("</").append(elementName).append(">");
         return sb.toString();
