@@ -101,7 +101,9 @@ public abstract class AbstractOrganization extends CsdEntity {
 
     public static class OrganizationOtherName implements CsdMarshalable {
 
+        /* Text value of this node */
         private String value;
+        /* Attribute @xml:lang */
         private String lang;
         private Marshaler<OrganizationOtherName> marshaler = OrganizationOtherNameMarshaler.get();
 

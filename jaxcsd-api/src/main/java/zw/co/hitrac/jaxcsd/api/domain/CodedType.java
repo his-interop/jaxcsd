@@ -9,8 +9,11 @@ import zw.co.hitrac.jaxcsd.api.marshal.Marshaler;
  */
 public class CodedType implements CsdMarshalable {
 
+    /* Attribure @code */
     private String code;
+    /* Attribute @codingScheme*/
     private String codingScheme;
+    /* The value of Coded Type eg <CodedType>MyValue</CodeType> */
     private String value = "";
     private Marshaler<CodedType> marshaler = CodedTypeMarshaler.get();
 

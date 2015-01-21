@@ -64,4 +64,10 @@ public class Record implements CsdMarshalable {
     public String marshal(String elementName) {
         return marshaler.marshal(this, elementName);
     }
+
+    public void setMarshaler(Marshaler<Record> marshaler) {
+        this.marshaler = marshaler;
+    }
+    
+    
 }

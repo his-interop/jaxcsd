@@ -8,6 +8,7 @@ import static zw.co.hitrac.jaxcsd.api.util.CsdElementConstants.*;
 /**
  *
  * @author Charles Chigoriwa
+ * @param <T>
  */
 public abstract class ExtensionMarshaler<T extends Extension> extends Marshaler<T> {
 
@@ -18,7 +19,7 @@ public abstract class ExtensionMarshaler<T extends Extension> extends Marshaler<
         if (anyXmlContent != null && !anyXmlContent.trim().isEmpty()) {
             sb.append("<").append(elementName);
             sb.append(" type=\"").append(extension.getType()).append("\"");
-            sb.append(" oid=\"").append(extension.getOid()).append("\"");
+            sb.append(" urn=\"").append(extension.getUrn()).append("\"");
             Map<String, String> attributes = getAnyAttributes(extension);
             if (attributes != null && !attributes.isEmpty()) {
                 for (String attributeName : attributes.keySet()) {

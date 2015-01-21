@@ -11,6 +11,8 @@ public class OtherID implements CsdMarshalable {
 
     private String code;
     private String assigningAuthorityName;
+    
+    /* Marshaler */
     private Marshaler<OtherID> marshaler = OtherIDMarshaler.get();
 
     public OtherID() {

@@ -7,15 +7,17 @@ package zw.co.hitrac.jaxcsd.api.domain;
 public abstract class Extension implements CsdMarshalable {
 
     private String type;
-    private String oid;
+    private String urn;
 
     public Extension() {
     }
 
-    public Extension(String type, String oid) {
+    public Extension(String type, String urn) {
         this.type = type;
-        this.oid = oid;
+        this.urn = urn;
     }
+
+    
 
     public String getType() {
         return type;
@@ -25,11 +27,13 @@ public abstract class Extension implements CsdMarshalable {
         this.type = type;
     }
 
-    public String getOid() {
-        return oid;
+    public String getUrn() {
+        return urn;
     }
 
-    public void setOid(String oid) {
-        this.oid = oid;
+    public void setUrn(String urn) {
+        this.urn = urn;
     }
+
+    
 }
