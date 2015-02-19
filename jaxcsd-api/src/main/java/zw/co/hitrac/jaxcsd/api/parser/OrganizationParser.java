@@ -70,7 +70,7 @@ public class OrganizationParser extends AbstractCsdParser<Organization> {
                     organization.getContactPoints().add(contactPoint);
                     contactPointParser.parse(contactPoint, CONTACT_POINT_ELEMENT, r, csdParserExtensions);
                 } else if ("parent".equals(r.getLocalName())) {
-                    Organization parent = new Organization(r.getAttributeValue("", "oid"));
+                    Organization parent = new Organization(r.getAttributeValue("", "entityID"));
                     organization.setParent(parent);
                 } else if (extensionElement.elementEquals(r)) {
                     if (csdParserExtensions != null && csdParserExtensions.getOrganizationExtensionParser() != null) {

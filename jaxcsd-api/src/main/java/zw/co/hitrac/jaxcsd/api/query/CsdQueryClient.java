@@ -2,6 +2,7 @@ package zw.co.hitrac.jaxcsd.api.query;
 
 import java.io.ByteArrayInputStream;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import zw.co.hitrac.jaxcsd.api.JaxcsdRuntimeException;
 import zw.co.hitrac.jaxcsd.api.domain.CSD;
@@ -20,8 +21,8 @@ public class CsdQueryClient {
 
     private CsdParser csdParser = new CsdParser();
 
-    public CSD callStandardStoredFunction(RequestParams requestParams, String functionUuid, String httpAddress, CallOptions callOptions) {
-        CareServicesRequest careServicesRequest = new CareServicesRequest(new Function(functionUuid, requestParams));
+    public CSD callStandardStoredFunction(RequestParams requestParams, String functionUrn, String httpAddress, CallOptions callOptions) {
+        CareServicesRequest careServicesRequest = new CareServicesRequest(new Function(functionUrn, requestParams));
         String xmlRequestBody = careServicesRequest.marshal();
         JaxcsdResponse jaxcsdResponse = JaxCsdUtil.executeXmlPost(xmlRequestBody, httpAddress);
         if (jaxcsdResponse.getStatusCode() != 200) {
@@ -36,7 +37,7 @@ public class CsdQueryClient {
             CsdParserExtensions csdParserExtensions = callOptions != null ? callOptions.getCsdParserExtensions() : null;
             csdParser.parse(csd, csdElement, r, csdParserExtensions);
             return csd;
-        } catch (Exception ex) {
+        } catch (XMLStreamException ex) {
             ex.printStackTrace(System.out);
             throw new JaxcsdRuntimeException(ex);
         }
