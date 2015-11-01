@@ -53,6 +53,7 @@ public class HandlerUtils {
     public static Record getRecord(XMLStreamReader r) {
         Record record = new Record();
         record.setStatus(r.getAttributeValue("", "status"));
+        record.setSourceDirectory(r.getAttributeValue("", "sourceDirectory"));
         return record;
     }
 

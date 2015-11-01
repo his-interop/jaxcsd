@@ -25,6 +25,15 @@ public class Record implements CsdMarshalable {
         this.status = status;
     }
 
+    public Record(Date created, Date updated, String status, String sourceDirectory) {
+        this.created = created;
+        this.updated = updated;
+        this.status = status;
+        this.sourceDirectory = sourceDirectory;
+    }
+    
+    
+
     public Date getCreated() {
         return created;
     }

@@ -33,7 +33,12 @@ public class RecordMarshaler extends Marshaler<Record> {
             attributes.put("status", record.getStatus());
         }
 
-        attributes.put("sourceDirectory", "http://www.ihe.net");
+        if (record.getSourceDirectory() != null) {
+            attributes.put("sourceDirectory", record.getSourceDirectory());
+
+        } else {
+            attributes.put("sourceDirectory", "http://www.ihe.net");
+        }
 
         return getInlineXmlElement(elementName, attributes);
     }
